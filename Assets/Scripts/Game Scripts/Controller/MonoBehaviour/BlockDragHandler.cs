@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace Monument.Controller
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class BlockDragHandler : MonoBehaviour
     {
         private MoveIntController controller;
+        private IEnumerator moveProcess;
         public void Load(IMovableBlock movable)
         {
             controller = new MoveIntController(movable, UpdatePosition);
@@ -16,21 +18,21 @@ namespace Monument.Controller
         private void OnMouseDown()
         {
             StartCoroutine(DragStart);
-
-            //controller.Move(Direction.Right);
         }
 
         private void UpdatePosition(Vector2Int coord)
         {
             Vector3 destination = coord.ToVector3();
-            transform.position = destination;
+            //transform.position = destination;
+            if (moveProcess != null)
+                StopCoroutine(moveProcess);
+            StartCoroutine(moveProcess = MoveSoftly(coord));
         }
 
         IEnumerator DragStart
         {
             get
             {
-                
                 Vector3 start = Input.mousePosition;
                 yield return new WaitUntil(() => !Input.GetMouseButton(0));
 
@@ -57,10 +59,19 @@ namespace Monument.Controller
                     }
 
                     controller.Move(dir);
-                }//vector3 to dir
+                }
+            }
+        }
+
+        IEnumerator MoveSoftly(Vector2Int coord)
+        {
+            const float speed = 10f;
+            float count = 100;
+            while (count > 0) {
+                transform.position = Vector3.Lerp(transform.position, coord.ToVector3(), speed * Time.deltaTime);
+                count--;
+                yield return null;
             }
         }
     }
-
-    
 }

@@ -15,10 +15,12 @@ namespace Monument.Skin
         [SerializeField]
         private TileSet[] tiles;
 
-        private static GameObject CreateBlockGameObject(IBlock block, GameObject gameObject)
+        private static GameObject CreateBlockGameObject(IBlock block, Sprite sprite)
         {
-            GameObject newObject = GameObject.Instantiate(gameObject, block.Coord.ToVector3(), new Quaternion());
-            newObject.GetComponent<BlockController>().Load(block);
+            GameObject newObject = new GameObject();
+            newObject.AddComponent<SpriteRenderer>().sprite = sprite;
+            newObject.transform.position = block.Coord.ToVector3();
+            //newObject.GetComponent<BlockController>().Load(block);
             return newObject;
         }
         
@@ -37,13 +39,13 @@ namespace Monument.Skin
             [SerializeField]
             private BlockType blockType;
             [SerializeField]
-            private GameObject gameObject;
+            private Sprite sprite;
 
             public void LoadSet()
             {
                 IEnumerable<IBlock> blocks = blockType.GetAllBlocks();
                 foreach (var block in blocks)
-                    CreateBlockGameObject(block, gameObject);
+                    CreateBlockGameObject(block, sprite);
             }
         }
     }

@@ -12,16 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278dd1101cf800e4a9eac1b1782a67db, type: 3}
   m_Name: Theme
   m_EditorClassIdentifier: 
-  blocks: []
+  blocks:
+  - blockType: 5
+    sprite: {fileID: 21300000, guid: 4c2133449fc762b408462639ac3ccaf2, type: 3}
+  - blockType: 4
+    sprite: {fileID: 21300000, guid: bc46767b1e3d333429338f3c64105c32, type: 3}
   tiles:
   - blockType: 1
-    oneWayTile: {fileID: 8193163175492405499, guid: b4949599d0b0f3e4e86e4d4b677f9fd6,
-      type: 3}
-    straightWayTile: {fileID: 4047044657536183491, guid: 66baec4c543ba454e9831e0aad218702,
-      type: 3}
-    curvedWayTile: {fileID: 4774140896629603987, guid: cf2be5818c2f572428f6d1dd6d553da4,
-      type: 3}
-    tripleWayTile: {fileID: 1247964384708942716, guid: 25f3282fe46104348a786f4988840d6f,
-      type: 3}
-    crossWayTile: {fileID: 8531730622222831604, guid: 02661c00798810d41a8444487b6737e0,
-      type: 3}
+    sprites:
+    - {fileID: 0}
+    - {fileID: 21300000, guid: 7592b2a8c32fea3468bc35ba8a7adf07, type: 3}
+    - {fileID: 21300000, guid: a3d6af5137d46fe46bab3804d9b93fae, type: 3}
+    - {fileID: 21300000, guid: 7d10968e45303d64fbc7e409f3d78902, type: 3}
+    - {fileID: 21300000, guid: ce5868e64e18a5648ab1a2f266e86767, type: 3}
+    - {fileID: 21300000, guid: acb2ad88499d5da4c8ebad46a30a5e0c, type: 3}
+    - {fileID: 21300000, guid: 406d70ffa4c662a4684e58c8796facd7, type: 3}
+    - {fileID: 21300000, guid: 6df854d1d4cb88c47a3e551b66810184, type: 3}
+    - {fileID: 21300000, guid: 32f9b58ccc7c03d45934abc3bf73dde6, type: 3}
+    - {fileID: 21300000, guid: 9d73b1080fd404044a01484b5165ba72, type: 3}
+    - {fileID: 21300000, guid: 5438bbc49856aa14c9089ef0126da4fe, type: 3}
+    - {fileID: 21300000, guid: a89327d66d92d1e4ea703b083a5f0ad7, type: 3}
+    - {fileID: 21300000, guid: d3f23b3fc9e1cc54b8141c56e05c244c, type: 3}
+    - {fileID: 21300000, guid: 87f805d8a51cb77428b18671d0cd5128, type: 3}
+    - {fileID: 21300000, guid: 26f0daed02890cf4bbf201e1f233eab5, type: 3}
+    - {fileID: 21300000, guid: a52429243adc01a4fab0f6116d158664, type: 3}

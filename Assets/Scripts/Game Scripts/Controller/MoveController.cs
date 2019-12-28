@@ -7,11 +7,11 @@ namespace Monument.Controller
     public class MoveController
     {
         //private 
-        private IMovable movable;
+        private IMovableMob movable;
         private PositionUpdate PositionUpdate;
         public bool CanMove { get; private set; } = true;
 
-        public MoveController(IMovable movable, PositionUpdate PositionUpdate)
+        public MoveController(IMovableMob movable, PositionUpdate PositionUpdate)
         {
             this.movable = movable;
             this.PositionUpdate = PositionUpdate;
@@ -28,9 +28,9 @@ namespace Monument.Controller
             CanMove = true;
         }
 
-        public void Move(Vector2 vector2)
+        public void Move(Vector2 delta)
         {
-            movable.Move(vector2);
+            movable.Move(delta);
         }
 
         private void UpdatePosition()

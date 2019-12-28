@@ -6,6 +6,7 @@
         Normal,
         RotateTile,
         Start,
-        End,
+        Portal,
+        Wall,
     }
 }

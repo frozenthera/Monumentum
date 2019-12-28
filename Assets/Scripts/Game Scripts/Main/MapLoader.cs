@@ -14,13 +14,12 @@ namespace Monument.Controller
         [SerializeField]
         private Stage currentStage;
 
-        [SerializeField]
-        private Theme currentTheme;
+        private GameObject tileMap;
 
         public void LoadStage()
         {
-            currentStage.ApplyToMap();
-            currentTheme.LoadThemeToMap();
+            tileMap = new GameObject(nameof(tileMap));
+            currentStage.ChangeStage();
         }
     }
 }

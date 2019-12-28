@@ -5,18 +5,21 @@ using UnityEngine;
 
 namespace Monument.Model
 {
-    public class Player : IMovable
+    public class Player : IMovableMob
     {
         public Player(Vector2Int coord)
         {
             Position = coord;
+            Singleton = this;
         }
+
+        public static Player Singleton { get; private set; }
 
         public Vector2 Position { get; private set; }
 
         public event Action OnMoved;
 
-        void IMovable.Move(Vector2 delta)
+        void IMovableMob.Move(Vector2 delta)
         {
             Vector2 destination = delta + Position;
             if (destination.CanStandOn())
@@ -24,12 +27,6 @@ namespace Monument.Model
                 Position += delta;
                 OnMoved();
             }
-        }
-
-        public void TryMovePlayer(Vector2 vector2)
-        {
-            //Vector2 destination
-            Position += vector2;
         }
     }
 }

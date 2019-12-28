@@ -219,7 +219,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -295,4 +295,3 @@ MonoBehaviour:
   player: {fileID: 866716798}
   map:
     currentStage: {fileID: 11400000, guid: 5cb4d356a6e718843b4f9ad2159577cf, type: 2}
-    currentTheme: {fileID: 11400000, guid: 8fb53403407bd9f45a15f70f42e0aa4c, type: 2}

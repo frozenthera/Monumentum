@@ -33,7 +33,7 @@ namespace Monument.Model
         public static Vector2Int PlayerCoord { get; private set; }
 
         #region 생성 메서드
-        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, Direction direction = Direction.None)
+        public static void CreateBlock(this BlockType type, Vector2Int coord, Direction direction = Direction.None, IStage nextStage = null)
         {
             IBlock block = null;
             switch (type)
@@ -41,19 +41,22 @@ namespace Monument.Model
                 case BlockType.Normal:
                     block = new NormalTile(coord, direction);
                     break;
+                case BlockType.Wall:
+                    block = new Wall(coord);
+                    break;
+                case BlockType.Portal:
+                    block = new Portal(coord, nextStage);
+                    break;
             }
+
             if (block is IMovableBlock movable)
-            {
                 movable.OnMoved += () => UpdateLoactionInfos(movable);
-            }
 
             if (!locationInfos.ContainsKey(coord))
                 locationInfos.Add(coord, new LocationInfo(block, type));
             if (!allBlocks.ContainsKey(type))
                 allBlocks[type] = new List<IBlock>();
             allBlocks[type].Add(block);
-
-            return null;
 
             void UpdateLoactionInfos(IMovableBlock movable2)
             {
@@ -79,48 +82,24 @@ namespace Monument.Model
 
         #endregion
 
-        #region 형 변환
-        public static Vector2Int ToVector2Int(this Vector2 vector2)
-        {
-            return new Vector2Int(GetNearestInt(vector2.x), GetNearestInt(vector2.y));
-
-            int GetNearestInt(float f)
-            {
-                return f >= 0 ? (int)(f + 0.5f) : (int)(f - 0.5f);
-            }
-        }
-
-        public static Vector2Int ToVector2(this Direction direction)
-        {
-            Vector2Int vector2 = new Vector2Int();
-            if(direction.HasFlag(Direction.Up))
-                vector2 += new Vector2Int(0, 1);
-            if (direction.HasFlag(Direction.Down))
-                vector2 += new Vector2Int(0, -1);
-            if (direction.HasFlag(Direction.Left))
-                vector2 += new Vector2Int(-1, 0);
-            if (direction.HasFlag(Direction.Right))
-                vector2 += new Vector2Int(1, 0);
-
-            return vector2;
-        }
-
-        #endregion
-
         #region 길 구하기
         public static bool CanStandOn(this Vector2 position)
         {
             Vector2Int coord = position.ToVector2Int();
+            
             LocationInfo location = coord.GetLocationInfo();
             if (location == null) return false;
 
             ITile tile = location.GetTile();
             if (tile == null) return false;
-
+            
             Direction openDirections = tile.OpenDirections;
+
             if (openDirections.HasFlag(Direction.Up))
+            {
                 if (Direction.Up.GetAccessibleSpace(coord).Contains(position))
                     return true;
+            }
             if (openDirections.HasFlag(Direction.Down))
                 if (Direction.Down.GetAccessibleSpace(coord).Contains(position))
                     return true;
@@ -130,30 +109,38 @@ namespace Monument.Model
             if (openDirections.HasFlag(Direction.Right))
                 if (Direction.Right.GetAccessibleSpace(coord).Contains(position))
                     return true;
-
             return false;
         }
         
+        public static bool IsCloseTo(this Vector2Int coord, ILocatable mob)
+        {
+            const float Length = BlockUnit + 2 * JudgeUnit;
+            Rect rect = new Rect(coord.x - Length / 2f, coord.y - Length / 2f, Length, Length);
+            return rect.Contains(mob.Position);
+        }
+
         //반드시 낱개의 direction에만 적용하시오.
-        private static Rect GetAccessibleSpace(this Direction direction, Vector2Int position)
+        private static Rect GetAccessibleSpace(this Direction direction, Vector2Int coord)
         {
             switch (direction)
             {
                 case Direction.Up:
-                    return new Rect(position.x - PathWidth / 2, position.y, PathWidth, PathHeight);
+                    return new Rect(coord.x - PathWidth / 2f, coord.y - PathWidth / 2f, PathWidth, PathHeight);
                 case Direction.Down:
-                    return new Rect(position.x - PathWidth / 2, position.y - PathHeight, PathWidth, PathHeight);
+                    return new Rect(coord.x - PathWidth / 2f, coord.y - PathHeight, PathWidth, PathHeight);
                 case Direction.Left:
-                    return new Rect(position.x - 0.5f, position.y - PathWidth / 2, PathHeight, PathWidth);
+                    return new Rect(coord.x - 1 / 2f, coord.y - PathWidth / 2f, PathHeight, PathWidth);
                 case Direction.Right:
-                    return new Rect(position.x - PathWidth / 2, position.y - PathWidth / 2, PathHeight, PathWidth);
+                    return new Rect(coord.x - PathWidth / 2f, coord.y - PathWidth / 2f, PathHeight, PathWidth);
                 default:
                     return new Rect();
             }
         }
-        private const float PathWidth = 0.2f;
+        private const float BlockUnit = 1f;
+        private const float JudgeUnit = 1 / 5f;
+        private const float PathWidth = JudgeUnit;
         private const float PathHeight = (PathWidth + 1) / 2f;
 
-#endregion
+        #endregion
     }
 }

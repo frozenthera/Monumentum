@@ -7,7 +7,7 @@ namespace Monument.Controller
 {
     public class PlayerController : MonoBehaviour
     {
-        private const float Speed = 3f;
+        private const float Speed = 2f;
 
         private readonly Player player = Vector2Int.zero.CreatePlayer();
         private MoveController move;
