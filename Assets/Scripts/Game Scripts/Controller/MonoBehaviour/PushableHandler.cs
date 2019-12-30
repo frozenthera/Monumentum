@@ -7,12 +7,12 @@ namespace Monument.Controller
 {
     public class PushableHandler : MonoBehaviour
     {
-        private IPushable pushable;
+        private IInteractable pushable;
 
-        public void Load(IPushable pushable)
+        public void Load(IInteractable pushable)
         {
             this.pushable = pushable;
-            StartCoroutine(WaitForPush);
+            //StartCoroutine(WaitForPush);
         }
 
         private IEnumerator WaitForPush {
@@ -21,7 +21,8 @@ namespace Monument.Controller
                 while (true)
                 {
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.F));
-                    pushable.Push(Player.Singleton);
+                    Debug.Log(Player.Singleton.Position);
+                    pushable.Interact(Player.Singleton);
                     yield return null;
                 }
             }

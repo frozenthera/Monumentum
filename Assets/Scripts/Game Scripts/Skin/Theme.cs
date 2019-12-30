@@ -3,6 +3,7 @@ using Monument.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Monument.Skin
@@ -15,38 +16,25 @@ namespace Monument.Skin
         [SerializeField]
         private TileSet[] tiles;
 
-        private static GameObject CreateBlockGameObject(IBlock block, Sprite sprite)
+        private Dictionary<BlockType, Action<IBlock>> blockCreators;
+        private Dictionary<BlockType, Action<IBlock>> BlockCreators
         {
-            GameObject newObject = new GameObject();
-            newObject.AddComponent<SpriteRenderer>().sprite = sprite;
-            newObject.transform.position = block.Coord.ToVector3();
-            //newObject.GetComponent<BlockController>().Load(block);
-            return newObject;
-        }
-        
-
-        public void LoadThemeToMap()
-        {
-            foreach (BlockSet block in blocks)
-                block.LoadSet();
-            foreach (TileSet tile in tiles)
-                tile.LoadSet();
-        }
-
-        [Serializable]
-        private class BlockSet
-        {
-            [SerializeField]
-            private BlockType blockType;
-            [SerializeField]
-            private Sprite sprite;
-
-            public void LoadSet()
+            get
             {
-                IEnumerable<IBlock> blocks = blockType.GetAllBlocks();
-                foreach (var block in blocks)
-                    CreateBlockGameObject(block, sprite);
+                if(blockCreators == null)
+                {
+                    blockCreators = ThemeSets.ToDictionary<IThemeSet, BlockType, Action<IBlock>>(o => o.BlockType, o => o.LoadSet);
+                }
+                return blockCreators;
             }
+        }
+
+        private IEnumerable<IThemeSet> ThemeSets => blocks.Union<IThemeSet>(tiles);
+
+        public void LoadTheme(BlockType type, IBlock block)
+        {
+            if(BlockCreators.TryGetValue(type, out var Create))
+                Create?.Invoke(block);
         }
     }
 }

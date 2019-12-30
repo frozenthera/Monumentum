@@ -9,32 +9,22 @@ namespace Monument.Skin
     public partial class Theme
     {
         [Serializable]
-        private class TileSet
+        private class TileSet : IThemeSet
         {
             [SerializeField]
             private BlockType blockType;
+            BlockType IThemeSet.BlockType => blockType;
 
             [SerializeField]
             private Sprite[] sprites = new Sprite[16];
 
-            public void LoadSet()
+            void IThemeSet.LoadSet(IBlock block)
             {
-                IEnumerable<ITile> tiles = blockType.GetAllTiles();
-                foreach (var tile in tiles)
-                {
-                    int pathCode = (int)tile.OpenDirections == -1 ? 15 : (int)tile.OpenDirections;
+                ITile tile = (ITile)block;
 
-                    Sprite currentSprite = sprites[pathCode];
-                    CreateTileGameObject(tile, currentSprite);
-                }
-            }
-            private static void CreateTileGameObject(ITile tile, Sprite sprite)
-            {
-                GameObject newObejct = new GameObject();
-                newObejct.transform.position = tile.Coord.ToVector3();
-                newObejct.AddComponent<SpriteRenderer>().sprite = sprite;
-                if (tile is IMovableBlock movable)
-                    newObejct.AddComponent<BlockDragHandler>().Load(movable);
+                int pathCode = (int)tile.OpenDirections == -1 ? 15 : (int)tile.OpenDirections;
+                Sprite currentSprite = sprites[pathCode];
+                tile.CreateAsGameObject(currentSprite);
             }
         }
     }

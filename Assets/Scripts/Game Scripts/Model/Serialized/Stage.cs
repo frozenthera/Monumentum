@@ -1,4 +1,5 @@
-﻿using Monument.Skin;
+﻿using Monument.Controller;
+using Monument.Skin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using UnityEngine;
 namespace Monument.Model.Serialized
 {
     [CreateAssetMenu(menuName = nameof(ScriptableObject) + "/" + nameof(Stage))]
-    public class Stage : ScriptableObject, IStage
+    public partial class Stage : ScriptableObject, IStage
     {
         [SerializeField]
         private Theme theme;
@@ -20,34 +21,16 @@ namespace Monument.Model.Serialized
         [SerializeField]
         private PortalDistribution[] portals;
 
-        public void ChangeStage()
-        {
-            foreach (var b in blocks)
-                b.ApplyToMap();
-            foreach (var t in tiles)
-                t.ApplyToMap();
-            foreach (var p in portals)
-                p.ApplyToMap();
+        private IEnumerable<IDistribution> Distributions => blocks.Union<IDistribution>(tiles).Union(portals);
 
-            theme.LoadThemeToMap();
+        public void ChangeTo()
+        {
+            ObjectFactory.ResetMap();
+            Distributions.ToList().ForEach(d => d.ApplyToMap(theme.LoadTheme));
         }
 
         [Serializable]
-        private class BlockDistribution
-        {
-            [SerializeField]
-            private BlockType blockType;
-            [SerializeField]
-            private List<Vector2Int> coords;
-
-            public void ApplyToMap()
-            {
-                blockType.CreateBlock(coords);
-            }
-        }
-
-        [Serializable]
-        private class TileDistribution
+        private class TileDistribution : IDistribution
         {
             [SerializeField]
             private BlockType blockType;
@@ -56,14 +39,14 @@ namespace Monument.Model.Serialized
             [SerializeField]
             private Vector2Int[] coords;
 
-            public void ApplyToMap()
+            void IDistribution.ApplyToMap(MapCallback callback)
             {
-                blockType.CreateBlock(coords, openDirections);
+                coords.ForEach(c => callback?.Invoke(blockType, blockType.CreateBlock(c, openDirections)));
             }
         }
 
         [Serializable]
-        private class PortalDistribution
+        private class PortalDistribution : IDistribution
         {
             [SerializeField]
             private Vector2Int coord;
@@ -72,10 +55,16 @@ namespace Monument.Model.Serialized
             [SerializeField]
             private Vector2Int nextCoord;
 
-            public void ApplyToMap()
+            void IDistribution.ApplyToMap(MapCallback callback)
             {
-                BlockType.Portal.CreateBlock(coord);
+                callback(BlockType.Portal, BlockType.Portal.CreateBlock(coord, nextMap));
             }
+        }
+
+        private delegate void MapCallback(BlockType type, IBlock info);
+        private interface IDistribution
+        {
+            void ApplyToMap(MapCallback callback);
         }
     }
 }

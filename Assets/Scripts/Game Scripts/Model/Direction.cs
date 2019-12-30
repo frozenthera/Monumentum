@@ -7,8 +7,8 @@ namespace Monument.Model
     {
         None,
         Up = 1,
-        Down = 2,
-        Left = 4,
-        Right = 8,
+        Right = 2,
+        Down = 4,
+        Left = 8,
     }
 }

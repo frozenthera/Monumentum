@@ -8,21 +8,11 @@ namespace Monument.Model
     public static partial class MapSetting
     {
         private readonly static Dictionary<Vector2Int, LocationInfo> locationInfos = new Dictionary<Vector2Int, LocationInfo>();
-        private readonly static Dictionary<BlockType, List<IBlock>> allBlocks = new Dictionary<BlockType, List<IBlock>>();
-
+        
         private static LocationInfo GetLocationInfo(this Vector2Int position)
         {
             locationInfos.TryGetValue(position, out LocationInfo value);
             return value;
-        }
-
-        public static IEnumerable<IBlock> GetAllBlocks(this BlockType type)
-        {
-            return allBlocks.ContainsKey(type) ? allBlocks[type] : null;
-        }
-        public static IEnumerable<ITile> GetAllTiles(this BlockType type)
-        {
-            return allBlocks.ContainsKey(type) ? allBlocks[type].Cast<ITile>() : null;
         }
 
         public static bool IsEmpty(this Vector2Int coord)
@@ -30,59 +20,44 @@ namespace Monument.Model
             return !locationInfos.ContainsKey(coord);
         }
 
-        public static Vector2Int PlayerCoord { get; private set; }
-
-        #region 생성 메서드
-        public static void CreateBlock(this BlockType type, Vector2Int coord, Direction direction = Direction.None, IStage nextStage = null)
+        private static void MoveBlock(this IBlock block, Vector2Int from, Vector2Int to)
         {
-            IBlock block = null;
-            switch (type)
-            {
-                case BlockType.Normal:
-                    block = new NormalTile(coord, direction);
-                    break;
-                case BlockType.Wall:
-                    block = new Wall(coord);
-                    break;
-                case BlockType.Portal:
-                    block = new Portal(coord, nextStage);
-                    break;
-            }
-
-            if (block is IMovableBlock movable)
-                movable.OnMoved += () => UpdateLoactionInfos(movable);
-
-            if (!locationInfos.ContainsKey(coord))
-                locationInfos.Add(coord, new LocationInfo(block, type));
-            if (!allBlocks.ContainsKey(type))
-                allBlocks[type] = new List<IBlock>();
-            allBlocks[type].Add(block);
-
-            void UpdateLoactionInfos(IMovableBlock movable2)
-            {
-                BlockType type2 = locationInfos[movable2.PreviousCoord].Type;
-                locationInfos.Remove(movable2.PreviousCoord);
-                locationInfos.Add(movable2.Coord, new LocationInfo(movable2, type2));
-            }
-        }
-        public static void CreateBlock(this BlockType type, IEnumerable<Vector2Int> coords, Direction direction = Direction.None)
-        {
-            foreach (Vector2Int coord in coords)
-            {
-                CreateBlock(type, coord, direction);
-            }
+            locationInfos.Remove(from);
+            locationInfos.Add(to, new LocationInfo(block));
         }
 
-        public static Player CreatePlayer(this Vector2Int coord)
+        public static void AddBlock(this Vector2Int coord, IBlock block)
         {
-            Player player = new Player(coord);
-            player.OnMoved += () => PlayerCoord = player.Position.ToVector2Int();
-            return player;
+            if (coord.IsEmpty())
+                locationInfos.Add(coord, new LocationInfo(block));
         }
 
-        #endregion
+        public static bool HasBlock<T>(this Vector2Int coord, out T block)
+        {
+            block = default;
+            if(!coord.IsEmpty() && locationInfos[coord].Block is T castBlock)
+            {
+                block = castBlock;
+                return true;
+            }
+            return false;
+        }
 
         #region 길 구하기
+        
+        public static bool TryMoveBlock(this IMovableBlock block, Direction direction)
+        {
+            Vector2Int destination = block.Coord + direction.ToVector2();
+
+            if (destination.IsEmpty() && Player.Singleton.Position.ToVector2Int() != block.Coord)
+            {
+                block.MoveBlock(block.Coord, destination);
+                block.Coord = destination;
+                return true;
+            }
+            return false;
+        }
+
         public static bool CanStandOn(this Vector2 position)
         {
             Vector2Int coord = position.ToVector2Int();
@@ -96,10 +71,8 @@ namespace Monument.Model
             Direction openDirections = tile.OpenDirections;
 
             if (openDirections.HasFlag(Direction.Up))
-            {
                 if (Direction.Up.GetAccessibleSpace(coord).Contains(position))
                     return true;
-            }
             if (openDirections.HasFlag(Direction.Down))
                 if (Direction.Down.GetAccessibleSpace(coord).Contains(position))
                     return true;
@@ -112,10 +85,68 @@ namespace Monument.Model
             return false;
         }
         
+        public static void TryInteract(this ILocatable mob)
+        {
+            if (TryGetExpectedCoord(mob.Position, out Vector2Int coord))
+            {
+                
+                if (coord.HasBlock(out IInteractable pushable))
+                    pushable.Interact(mob);
+            }
+
+            bool TryGetExpectedCoord(Vector2 position, out Vector2Int expectedCoord)
+            {
+                
+                Vector2 distFromCenter = position - position.ToVector2Int();
+                expectedCoord = position.ToVector2Int();
+                Debug.Log(distFromCenter);
+                Debug.Log(GetRect(Direction.Down));
+                switch (distFromCenter)
+                {
+                    case var d when (GetRect(Direction.Up).Contains(d)):
+                        expectedCoord += Vector2Int.up;
+                        return true;
+                    case var d when (GetRect(Direction.Down).Contains(d)):
+                        expectedCoord += Vector2Int.down;
+                        return true;
+                    case var d when (GetRect(Direction.Left).Contains(d)):
+                        expectedCoord += Vector2Int.left;
+                        return true;
+                    case var d when (GetRect(Direction.Right).Contains(d)):
+                        expectedCoord += Vector2Int.right;
+                        return true;
+                }
+                
+                return false;
+
+                Rect GetRect(Direction dir)
+                {
+                    Rect rect = InteractRect;
+                    switch (dir)
+                    {
+                        case Direction.Up:
+                            rect.center += new Vector2(0, JudgeUnit * 2);
+                            break;
+                        case Direction.Down:
+                            rect.position -= new Vector2(JudgeUnit / 2f, JudgeUnit * 5 / 2);
+                            break;
+                        case Direction.Left:
+                            rect.center -= new Vector2(JudgeUnit * 2, 0);
+                            break;
+                        case Direction.Right:
+                            rect.center += new Vector2(JudgeUnit * 2, 0);
+                            break;
+                    }
+                    return rect;
+                }
+            }
+        }
+
         public static bool IsCloseTo(this Vector2Int coord, ILocatable mob)
         {
             const float Length = BlockUnit + 2 * JudgeUnit;
             Rect rect = new Rect(coord.x - Length / 2f, coord.y - Length / 2f, Length, Length);
+
             return rect.Contains(mob.Position);
         }
 
@@ -136,6 +167,9 @@ namespace Monument.Model
                     return new Rect();
             }
         }
+
+        private static readonly Rect InteractRect = new Rect(0, 0, JudgeUnit, JudgeUnit);
+
         private const float BlockUnit = 1f;
         private const float JudgeUnit = 1 / 5f;
         private const float PathWidth = JudgeUnit;

@@ -14,12 +14,9 @@ namespace Monument.Controller
         [SerializeField]
         private Stage currentStage;
 
-        private GameObject tileMap;
-
         public void LoadStage()
         {
-            tileMap = new GameObject(nameof(tileMap));
-            currentStage.ChangeStage();
+            currentStage.ChangeTo();
         }
     }
 }

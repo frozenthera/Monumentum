@@ -15,7 +15,9 @@ namespace Monument.Controller
         public void Init()
         {
             move = new MoveController(player, (position) => transform.position = position);
+
             StartCoroutine(Update);
+            StartCoroutine(WaitForInteract);
         }
 
         private IEnumerator Update
@@ -27,6 +29,19 @@ namespace Monument.Controller
                     move.Move(Speed * Time.deltaTime * new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
                     yield return null;
                     yield return new WaitUntil(() => move.CanMove);
+                }
+            }
+        }
+
+        private IEnumerator WaitForInteract
+        {
+            get
+            {
+                while (true)
+                {
+                    yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.F));
+                    player.TryInteract();
+                    yield return null;
                 }
             }
         }

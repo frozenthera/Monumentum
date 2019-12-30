@@ -22,6 +22,7 @@ namespace Monument.Model
         void IMovableMob.Move(Vector2 delta)
         {
             Vector2 destination = delta + Position;
+            
             if (destination.CanStandOn())
             {
                 Position += delta;
