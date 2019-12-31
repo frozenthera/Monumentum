@@ -1,10 +1,10 @@
-﻿using Monument.Controller;
-using Monument.Model;
+﻿using Monumentum.Controller;
+using Monumentum.Model;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Monument.Skin
+namespace Monumentum.Skin
 {
     public partial class Theme
     {
@@ -20,9 +20,6 @@ namespace Monument.Skin
             public void LoadSet(IBlock block)
             {
                 block.CreateAsGameObject(sprite);
-                /*IEnumerable<IBlock> blocks = blockType.GetAllBlocks();
-                foreach (var block in blocks)
-                    block.CreateAsGameObject(sprite);*/
             }
         }
     }

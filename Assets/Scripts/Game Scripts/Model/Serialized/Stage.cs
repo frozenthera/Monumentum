@@ -1,11 +1,11 @@
-﻿using Monument.Controller;
-using Monument.Skin;
+﻿using Monumentum.Controller;
+using Monumentum.Skin;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Monument.Model.Serialized
+namespace Monumentum.Model.Serialized
 {
     [CreateAssetMenu(menuName = nameof(ScriptableObject) + "/" + nameof(Stage))]
     public partial class Stage : ScriptableObject, IStage

@@ -1,8 +1,8 @@
-﻿using Monument.Model;
+﻿using Monumentum.Model;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public static class MapObjectFactory
     {
@@ -39,10 +39,10 @@ namespace Monument.Controller
         {
             if (block is IMovableBlock m)
                 go.AddComponent<BlockDragHandler>().Load(m);
-            //if (block is IInteractable i)
-            //    go.AddComponent<PushableHandler>().Load(i);
             if (block is IRotatable r)
                 go.AddComponent<RotatableBlockHandler>().Load(r);
+            if (block is IBreakableBlock b)
+                go.AddComponent<BreakableHandler>().Load(b);
         }
     }
 }

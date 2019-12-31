@@ -1,4 +1,4 @@
-﻿namespace Monument.Model
+﻿namespace Monumentum.Model
 {
     public enum BlockType
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using Monument.Model;
+using Monumentum.Model;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public class RotatableBlockHandler : MonoBehaviour
     {

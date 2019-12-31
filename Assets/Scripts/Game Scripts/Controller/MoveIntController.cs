@@ -1,7 +1,7 @@
-﻿using Monument.Model;
+﻿using Monumentum.Model;
 using UnityEngine;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public delegate void CoordUpdate(Vector2Int coord);
     public class MoveIntController

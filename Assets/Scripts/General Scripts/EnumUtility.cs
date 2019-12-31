@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Monument.Model;
+using Monumentum.Model;
 
-namespace Monument
+namespace Monumentum
 {
     public static class EnumUtility
     {

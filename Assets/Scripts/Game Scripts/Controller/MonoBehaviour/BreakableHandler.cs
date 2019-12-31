@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Monumentum.Model;
 using UnityEngine;
 
-public class BreakableHandler : MonoBehaviour
+namespace Monumentum.Controller
 {
-    // Start is called before the first frame update
-    void Start()
+    public class BreakableHandler : MonoBehaviour
     {
-        
-    }
+        private IBreakableBlock breakable;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Load(IBreakableBlock breakable)
+        {
+            this.breakable = breakable;
+            breakable.OnBreaking += BeBroken;
+        }
+
+        private void BeBroken()
+        {
+            Destroy(gameObject);
+        }
     }
 }

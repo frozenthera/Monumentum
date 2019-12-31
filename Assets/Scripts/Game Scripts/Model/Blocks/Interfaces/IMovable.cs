@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Monument.Model
+namespace Monumentum.Model
 {
     public interface IMovableMob : ILocatable
     {

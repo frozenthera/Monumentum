@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public static class Offset
     {

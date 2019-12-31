@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using Monument.Model;
+using Monumentum.Model;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public delegate void PositionUpdate(Vector3 position);
     public class MoveController

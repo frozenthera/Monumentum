@@ -1,12 +1,12 @@
-﻿using Monument.Controller;
-using Monument.Model;
+﻿using Monumentum.Controller;
+using Monumentum.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Monument.Skin
+namespace Monumentum.Skin
 {
     [CreateAssetMenu(menuName = nameof(ScriptableObject) + "/" + nameof(Theme))]
     public partial class Theme : ScriptableObject

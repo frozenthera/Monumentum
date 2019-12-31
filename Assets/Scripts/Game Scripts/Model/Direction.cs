@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Monument.Model
+namespace Monumentum.Model
 {
     [Flags]
     public enum Direction

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Monument.Model.Serialized
+namespace Monumentum.Model.Serialized
 {
     public partial class Stage
     {

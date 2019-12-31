@@ -1,8 +1,8 @@
-﻿using Monument.Model;
+﻿using Monumentum.Model;
 using System.Collections;
 using UnityEngine;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     [RequireComponent(typeof(BoxCollider2D))]
     public class BlockDragHandler : MonoBehaviour

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Monument.Model;
+using Monumentum.Model;
 using UnityEngine;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public class PushableHandler : MonoBehaviour
     {

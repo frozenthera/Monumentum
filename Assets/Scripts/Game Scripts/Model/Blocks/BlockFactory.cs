@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Monument.Model
+namespace Monumentum.Model
 {
     public static partial class BlockFactory
     {

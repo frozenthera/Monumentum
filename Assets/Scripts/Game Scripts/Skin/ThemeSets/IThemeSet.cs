@@ -1,6 +1,6 @@
-﻿using Monument.Model;
+﻿using Monumentum.Model;
 
-namespace Monument.Skin
+namespace Monumentum.Skin
 {
     public partial class Theme
     {

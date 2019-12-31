@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monument.Model;
+using Monumentum.Model;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public class PlayerController : MonoBehaviour
     {

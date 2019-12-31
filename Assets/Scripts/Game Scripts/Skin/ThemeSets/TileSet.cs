@@ -1,10 +1,10 @@
-﻿using Monument.Model;
+﻿using Monumentum.Model;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Monument.Controller;
+using Monumentum.Controller;
 
-namespace Monument.Skin
+namespace Monumentum.Skin
 {
     public partial class Theme
     {

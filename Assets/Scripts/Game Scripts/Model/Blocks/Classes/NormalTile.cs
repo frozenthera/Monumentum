@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Monument.Model
+namespace Monumentum.Model
 {
     public static partial class BlockFactory
     {
@@ -33,7 +33,6 @@ namespace Monument.Model
             {
                 if (durablity > 0)
                 {
-                    Debug.Log(1);
                     durablity--;
                     if(durablity == 0)
                     {

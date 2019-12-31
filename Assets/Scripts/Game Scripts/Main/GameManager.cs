@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Monument.Controller
+namespace Monumentum.Controller
 {
     public class GameManager : MonoBehaviour
     {

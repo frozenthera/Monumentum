@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Monument.Model
+namespace Monumentum.Model
 {
     public class Player : IMovableMob
     {

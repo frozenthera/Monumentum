@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Monument.Model
+namespace Monumentum.Model
 {
     public static class BlockUtility
     {
