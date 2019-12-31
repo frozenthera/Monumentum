@@ -4,7 +4,7 @@ namespace Monument.Model
 {
     public interface IRotatable
     {
-        void RotateBlock(bool isClockwise = false);
+        void RotateBlock(bool isClockwise = true);
         event Action OnRotated;
     }
 }

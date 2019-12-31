@@ -25,7 +25,11 @@ namespace Monument.Model
             
             if (destination.CanStandOn())
             {
-                Position += delta;
+                Vector2Int pastCoord = Position.ToVector2Int();
+                Vector2Int curCoord = destination.ToVector2Int();
+                if (pastCoord != curCoord)
+                    pastCoord.GetBlock<IBreakableBlock>().DamageBlock();
+                Position = destination;
                 OnMoved();
             }
         }

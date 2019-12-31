@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace Monument.Controller
 {
-    public static class ObjectFactory
+    public static class MapObjectFactory
     {
         private static GameObject mapParent = null;
         private static GameObject MapParent
@@ -30,18 +30,19 @@ namespace Monument.Controller
             newObject.AddComponent<SpriteRenderer>().sprite = sprite;
             newObject.transform.position = block.Coord.ToVector3();
             newObject.transform.SetParent(MapParent.transform);
-
-            switch (block)
-            {
-                case IMovableBlock m:
-                    newObject.AddComponent<BlockDragHandler>().Load(m);
-                    break;
-                case IInteractable i:
-                    newObject.AddComponent<PushableHandler>().Load(i);
-                    break;
-            }
-
+            newObject.AddFitComponents(block);
+            
             return newObject;
+        }
+
+        private static void AddFitComponents(this GameObject go, IBlock block)
+        {
+            if (block is IMovableBlock m)
+                go.AddComponent<BlockDragHandler>().Load(m);
+            //if (block is IInteractable i)
+            //    go.AddComponent<PushableHandler>().Load(i);
+            if (block is IRotatable r)
+                go.AddComponent<RotatableBlockHandler>().Load(r);
         }
     }
 }

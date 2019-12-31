@@ -8,23 +8,24 @@ namespace Monument.Model
     {
         private readonly static Dictionary<BlockType, List<IBlock>> allBlocks = new Dictionary<BlockType, List<IBlock>>();
 
+        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, Direction dir, int durablity) => CreateBlock(type, coord, dir, null, durablity);
         public static IBlock CreateBlock(this BlockType type, Vector2Int coord, IStage nextStage) => CreateBlock(type, coord, Direction.None, nextStage);
-        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, Direction direction = Direction.None, IStage nextStage = null)
+        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, Direction dir = Direction.None, IStage nextStage = null, int durablity = -1)
         {
             IBlock newBlock = null;
             switch (type)
             {
                 case BlockType.Normal:
-                    newBlock = new NormalTile(coord, direction);
+                    newBlock = new NormalTile(coord, dir, durablity);
                     break;
                 case BlockType.Wall:
-                    newBlock = new Wall(coord);
+                    newBlock = new Wall(coord, dir);
                     break;
                 case BlockType.Portal:
                     newBlock = new Portal(coord, nextStage);
                     break;
                 case BlockType.RotateTile:
-                    newBlock = new RotatableTile(coord, direction);
+                    newBlock = new RotatableTile(coord, dir, durablity);
                     break;
             }
 

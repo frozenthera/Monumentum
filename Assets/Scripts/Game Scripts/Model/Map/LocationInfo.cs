@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Monument.Model
 {
-    public static partial class MapSetting
+    public static partial class MapUtility
     {
         private class LocationInfo
         {

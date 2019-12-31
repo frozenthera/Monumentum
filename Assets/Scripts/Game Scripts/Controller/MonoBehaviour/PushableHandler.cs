@@ -21,7 +21,7 @@ namespace Monument.Controller
                 while (true)
                 {
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.F));
-                    Debug.Log(Player.Singleton.Position);
+                    //Debug.Log(Player.Singleton.Position);
                     pushable.Interact(Player.Singleton);
                     yield return null;
                 }

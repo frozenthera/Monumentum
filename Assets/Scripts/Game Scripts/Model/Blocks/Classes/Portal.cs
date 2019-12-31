@@ -20,7 +20,7 @@ namespace Monument.Model
 
             public event Action OnInteracted;
 
-            public void Interact(ILocatable mob)
+            void IInteractable.Interact(ILocatable mob, Direction dir)
             {
                 nextStage.ChangeTo();
                 OnInteracted?.Invoke();
