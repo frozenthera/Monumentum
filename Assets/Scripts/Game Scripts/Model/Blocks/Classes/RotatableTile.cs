@@ -23,17 +23,17 @@ namespace Monumentum.Model
             public Direction OpenDirections { get; private set; }
 
             public event Action OnMoved;
-            public event Action OnRotated;
+            public event RotateEventHandler OnRotated;
 
             void IRotatable.RotateBlock(bool isClockwise)
             {
                 if (CanRotate())
                 {
-                    //캐릭터가 이 위에 올라와 있다면.
-                    //회전 방향으로 이동.
+                    if (Coord.LocatesPlayer())
+                        Player.Singleton.RotatePosition(isClockwise);
 
                     OpenDirections = OpenDirections.Rotate(isClockwise);
-                    OnRotated?.Invoke();
+                    OnRotated?.Invoke(isClockwise);
                 }
             }
 

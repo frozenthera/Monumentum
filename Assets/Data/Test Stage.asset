@@ -46,4 +46,4 @@ MonoBehaviour:
   portals:
   - coord: {x: 0, y: -1}
     nextMap: {fileID: 11400000}
-    nextCoord: {x: 3, y: 0}
+    nextCoord: {x: 0, y: 1}

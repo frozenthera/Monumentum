@@ -22,7 +22,7 @@ namespace Monumentum.Controller
                 {
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.F));
                     //Debug.Log(Player.Singleton.Position);
-                    pushable.Interact(Player.Singleton);
+                    //pushable.Interact(Player.Singleton);
                     yield return null;
                 }
             }

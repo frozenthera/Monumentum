@@ -14,9 +14,9 @@ namespace Monumentum.Model.Serialized
             [SerializeField]
             private List<Vector2Int> coords;
 
-            void IDistribution.ApplyToMap(MapCallback callback)
+            void IDistribution.ApplyToMap()
             {
-                coords.ForEach(c => callback(blockType, blockType.CreateBlock(c)));
+                coords.ForEach(c => blockType.CreateBlock(c));
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿namespace Monumentum.Model
+﻿using System;
+using UnityEngine;
+
+namespace Monumentum.Model
 {
     public interface IStage
     {

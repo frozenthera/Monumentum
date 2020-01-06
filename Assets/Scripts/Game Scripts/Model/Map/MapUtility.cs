@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Monumentum.Model
@@ -52,9 +53,16 @@ namespace Monumentum.Model
             return default;
         }
 
+        public static bool LocatesPlayer(this Vector2Int coord)
+        {
+            return coord == Player.Singleton.Position.ToVector2Int();
+        }
+
         public static void ResetMap()
         {
             locationInfos.Clear();
+            OnReset?.Invoke();
         }
+        public static event Action OnReset;
     }
 }

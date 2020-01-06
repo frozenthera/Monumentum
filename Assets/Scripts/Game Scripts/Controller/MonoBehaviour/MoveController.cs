@@ -6,12 +6,12 @@ namespace Monumentum.Controller
     public delegate void PositionUpdate(Vector3 position);
     public class MoveController
     {
-        //private 
-        private IMovableMob movable;
+        /*//private 
+        private IWalkableMob movable;
         private PositionUpdate PositionUpdate;
         public bool CanMove { get; private set; } = true;
 
-        public MoveController(IMovableMob movable, PositionUpdate PositionUpdate)
+        public MoveController(IWalkableMob movable, PositionUpdate PositionUpdate)
         {
             this.movable = movable;
             this.PositionUpdate = PositionUpdate;
@@ -30,12 +30,12 @@ namespace Monumentum.Controller
 
         public void Move(Vector2 delta)
         {
-            movable.Move(delta);
+            movable.Walk(delta);
         }
 
         private void UpdatePosition()
         {
             PositionUpdate(movable.Position.ToVector3());
-        }
+        }*/
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ namespace Monumentum.Model
         private readonly static Dictionary<BlockType, List<IBlock>> allBlocks = new Dictionary<BlockType, List<IBlock>>();
 
         public static IBlock CreateBlock(this BlockType type, Vector2Int coord, Direction dir, int durablity) => CreateBlock(type, coord, dir, null, durablity);
-        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, IStage nextStage) => CreateBlock(type, coord, Direction.None, nextStage);
-        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, Direction dir = Direction.None, IStage nextStage = null, int durablity = -1)
+        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, IStage nextStage, Vector2Int nextCoord) => CreateBlock(type, coord, Direction.None, nextStage, -1, nextCoord);
+        public static IBlock CreateBlock(this BlockType type, Vector2Int coord, Direction dir = Direction.None, IStage nextStage = null, int durablity = -1, Vector2Int nextCoord = new Vector2Int())
         {
             IBlock newBlock = null;
             switch (type)
@@ -22,7 +23,7 @@ namespace Monumentum.Model
                     newBlock = new Wall(coord, dir);
                     break;
                 case BlockType.Portal:
-                    newBlock = new Portal(coord, nextStage);
+                    newBlock = new Portal(coord, nextStage, nextCoord);
                     break;
                 case BlockType.RotateTile:
                     newBlock = new RotatableTile(coord, dir, durablity);
@@ -30,13 +31,15 @@ namespace Monumentum.Model
             }
 
             coord.AddBlock(newBlock);
+            OnCreated?.Invoke(type, newBlock);
             return newBlock;
         }
-
-        public static Player CreatePlayer(this Vector2Int coord)
+        public static event Action<BlockType, IBlock> OnCreated;
+        public static event Action<IStage, Vector2Int> OnPortalUsed;
+        /*public static Player CreatePlayer(this Vector2Int coord)
         {
-            Player player = new Player(coord);
+            //Player player = new Player(coord);
             return player;
-        }
+        }*/
     }
 }

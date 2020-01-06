@@ -1,0 +1,14 @@
+{
+    "name": "Monumentum.Model",
+    "references": [
+        "GUID:96279fbdba0b41a4c8a931408e6d5bb1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

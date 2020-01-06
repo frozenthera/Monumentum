@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Monumentum.Controller
 {
-    public class BreakableHandler : MonoBehaviour
+    internal class BreakableHandler : MonoBehaviour
     {
         private IBreakableBlock breakable;
 

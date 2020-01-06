@@ -9,7 +9,7 @@ namespace Monumentum.Model
         {
             Vector2Int destination = block.Coord + direction.ToVector2Int();
 
-            if (destination.IsEmpty() && Player.Singleton.Position.ToVector2Int() != block.Coord)
+            if (destination.IsEmpty() && !block.Coord.LocatesPlayer())
             {
                 block.MoveBlock(block.Coord, destination);
                 block.Coord = destination;

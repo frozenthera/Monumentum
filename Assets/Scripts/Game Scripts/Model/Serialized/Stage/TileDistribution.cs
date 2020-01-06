@@ -17,9 +17,9 @@ namespace Monumentum.Model.Serialized
             [SerializeField]
             private Vector2Int[] coords;
 
-            void IDistribution.ApplyToMap(MapCallback callback)
+            void IDistribution.ApplyToMap()
             {
-                coords.ForEach(c => callback?.Invoke(blockType, blockType.CreateBlock(c, openDirections, durablity)));
+                coords.ForEach(c => blockType.CreateBlock(c, openDirections, durablity));
             }
         }
     }

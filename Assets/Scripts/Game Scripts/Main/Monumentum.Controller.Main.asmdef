@@ -1,0 +1,17 @@
+{
+    "name": "Monumentum.Controller.Main",
+    "references": [
+        "GUID:96279fbdba0b41a4c8a931408e6d5bb1",
+        "GUID:f8877cc88f25a8942bc18d8855ff3bb7",
+        "GUID:e3b0e8822312cf542806baec4c17f364",
+        "GUID:030a09aee3907f842b0adc4989e661ae"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

@@ -24,7 +24,7 @@ namespace Monumentum.Skin
 
                 int pathCode = (int)tile.OpenDirections == -1 ? 15 : (int)tile.OpenDirections;
                 Sprite currentSprite = sprites[pathCode];
-                tile.CreateAsGameObject(currentSprite);
+                OnThemeLoaded(tile, currentSprite);
             }
         }
     }

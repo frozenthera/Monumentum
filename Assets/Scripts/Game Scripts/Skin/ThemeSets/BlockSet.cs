@@ -1,7 +1,5 @@
-﻿using Monumentum.Controller;
-using Monumentum.Model;
+﻿using Monumentum.Model;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Monumentum.Skin
@@ -17,9 +15,9 @@ namespace Monumentum.Skin
             [SerializeField]
             private Sprite sprite;
 
-            public void LoadSet(IBlock block)
+            void IThemeSet.LoadSet(IBlock block)
             {
-                block.CreateAsGameObject(sprite);
+                OnThemeLoaded(block, sprite);
             }
         }
     }

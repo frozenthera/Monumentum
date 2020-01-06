@@ -4,7 +4,7 @@
     {
         private interface IDistribution
         {
-            void ApplyToMap(MapCallback callback);
+            void ApplyToMap();
         }
     }
 }

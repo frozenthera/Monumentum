@@ -15,9 +15,9 @@ namespace Monumentum.Model.Serialized
             [SerializeField]
             private Vector2Int nextCoord;
 
-            void IDistribution.ApplyToMap(MapCallback callback)
+            void IDistribution.ApplyToMap()
             {
-                callback(BlockType.Portal, BlockType.Portal.CreateBlock(coord, nextMap));
+                BlockType.Portal.CreateBlock(coord, nextMap, nextCoord);
             }
         }
     }

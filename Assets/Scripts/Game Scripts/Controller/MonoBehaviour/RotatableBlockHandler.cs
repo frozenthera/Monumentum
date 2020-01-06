@@ -5,30 +5,36 @@ using UnityEngine;
 
 namespace Monumentum.Controller
 {
-    public class RotatableBlockHandler : MonoBehaviour
+    internal class RotatableBlockHandler : MonoBehaviour
     {
         private IRotatable rotatable;
         public void Load(IRotatable rotatable)
         {
             this.rotatable = rotatable;
-            rotatable.OnRotated += () => StartCoroutine(RotateGameObject);
+            rotatable.OnRotated += Rotate90Smoothly;
         }
 
-        void Update()
+        private const float Duration = 0.3f;
+        private void Rotate90Smoothly(bool isClockwise = true)
         {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                rotatable.RotateBlock();
-            }
+            StartCoroutine(Rotate(Vector3.forward, isClockwise ? -90 : 90, Duration));
         }
 
-        IEnumerator RotateGameObject
+        //https://answers.unity.com/questions/1236494/how-to-rotate-fluentlysmoothly.html
+        private IEnumerator Rotate(Vector3 axis, float angle, float duration = 1.0f)
         {
-            get
+            Quaternion from = transform.rotation;
+            Quaternion to = transform.rotation;
+            to *= Quaternion.Euler(axis * angle);
+
+            float elapsed = 0.0f;
+            while (elapsed < duration)
             {
-                transform.Rotate(0, 0, -90);
+                transform.rotation = Quaternion.Slerp(from, to, elapsed / duration);
+                elapsed += Time.deltaTime;
                 yield return null;
             }
+            transform.rotation = to;
         }
     }
 }

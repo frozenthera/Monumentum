@@ -1,6 +1,4 @@
-﻿using Monumentum.Controller;
-using Monumentum.Skin;
-using System.Collections;
+﻿using Monumentum.Skin;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,12 +20,13 @@ namespace Monumentum.Model.Serialized
 
         private IEnumerable<IDistribution> Distributions => blocks.Union<IDistribution>(tiles).Union(portals);
 
-        public void ChangeTo()
+        void IStage.ChangeTo()
         {
-            MapObjectFactory.ResetMap();
-            Distributions.ForEach(d => d.ApplyToMap(theme.LoadTheme));
+            Theme.SetCurrentTheme(theme);
+            MapUtility.ResetMap();
+            Distributions.ForEach(d => d.ApplyToMap());
         }
-
-        private delegate void MapCallback(BlockType type, IBlock info);
     }
 }
+
+

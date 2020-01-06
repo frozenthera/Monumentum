@@ -9,11 +9,27 @@ namespace Monumentum.Model
         public static Vector2Int ToVector2Int(this Vector2 vector2)
         {
             return new Vector2Int(GetNearestInt(vector2.x), GetNearestInt(vector2.y));
+        }
 
-            int GetNearestInt(float f)
-            {
-                return f >= 0 ? (int)(f + 0.5f) : (int)(f - 0.5f);
-            }
+        public static Vector3 GetTileCenter(this Vector3 position)
+        {
+            return new Vector3(GetNearestInt(position.x / Offset), GetNearestInt(position.y / Offset)) * Offset;
+        }
+
+        public static Vector3 ToVector3(this Vector2Int vector2)
+        {
+            return ToVector3((Vector2)vector2);
+        }
+
+        private const float Offset = 2f;
+        public static Vector3 ToVector3(this Vector2 vector2)
+        {
+            return vector2 * Offset;
+        }
+
+        private static int GetNearestInt(float f)
+        {
+            return f >= 0 ? (int)(f + 0.5f) : (int)(f - 0.5f);
         }
 
         public static Vector2Int ToVector2Int(this Direction direction)
@@ -43,6 +59,14 @@ namespace Monumentum.Model
                 vector2 += Vector2.right;
 
             return vector2;
+        }
+
+        public static Vector2 Rotate(this Vector2 vector2, bool isClockwise = true)
+        {
+            Vector2 center = vector2.ToVector2Int();
+            Vector2 distFromCenter = vector2 - center;
+
+            return center + (isClockwise ? new Vector2(distFromCenter.y, - distFromCenter.x) : new Vector2(- distFromCenter.y, distFromCenter.x));
         }
 
         public static Vector2Int[] GetNearCoords(this Vector2Int coord)

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Monumentum.Controller
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class BlockDragHandler : MonoBehaviour
+    internal class BlockDragHandler : MonoBehaviour
     {
         private MoveIntController controller;
         private IEnumerator moveProcess;

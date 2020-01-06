@@ -46,10 +46,4 @@ namespace Monumentum.Model
             public event Action OnBreaking;
         }
     }
-
-    public interface IBreakableBlock : IBlock
-    {
-        void DamageBlock();
-        event Action OnBreaking;
-    }
 }

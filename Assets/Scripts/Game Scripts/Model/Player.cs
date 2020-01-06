@@ -5,21 +5,25 @@ using UnityEngine;
 
 namespace Monumentum.Model
 {
-    public class Player : IMovableMob
+    public class Player : IWalkableMob
     {
-        public Player(Vector2Int coord)
+        private Player() { }
+        public static Player Create(Vector2Int coord)
         {
-            Position = coord;
-            Singleton = this;
+            Singleton = new Player();
+            Singleton.Position = coord;
+            return Singleton;
         }
 
-        public static Player Singleton { get; private set; }
+        public static Player Singleton { get; private set; } = null;
 
         public Vector2 Position { get; private set; }
 
-        public event Action OnMoved;
+        public event RotateEventHandler OnRotated;
+        public event Action<Vector2> OnMoved;
+        public event Action OnWalked;
 
-        void IMovableMob.Move(Vector2 delta)
+        public void Walk(Vector2 delta)
         {
             Vector2 destination = delta + Position;
             
@@ -27,11 +31,27 @@ namespace Monumentum.Model
             {
                 Vector2Int pastCoord = Position.ToVector2Int();
                 Vector2Int curCoord = destination.ToVector2Int();
-                if (pastCoord != curCoord)
-                    pastCoord.GetBlock<IBreakableBlock>().DamageBlock();
+
+                if (pastCoord != curCoord && pastCoord.HasBlock(out IBreakableBlock b))
+                    b.DamageBlock();
+
                 Position = destination;
-                OnMoved();
+
+                OnMoved?.Invoke(Position);
+                //OnWalked?.Invoke();
             }
+        }
+
+        public void Warp(Vector2Int coord)
+        {
+            Position = coord;
+            OnMoved?.Invoke(Position);
+        }
+
+        public void RotatePosition(bool isClockwise = true)
+        {
+            Position = Position.Rotate(isClockwise);
+            OnRotated?.Invoke(isClockwise);
         }
     }
 }
