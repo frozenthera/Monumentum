@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9429040ea64e1db49b9b0721ffcd76d3, type: 3}
+  m_Name: Test Stage
+  m_EditorClassIdentifier: 
+  theme: {fileID: 11400000, guid: 8fb53403407bd9f45a15f70f42e0aa4c, type: 2}
+  blocks:
+  - blockType: 5
+    coords:
+    - {x: -2, y: 0}
+  tiles:
+  - blockType: 1
+    openDirections: -1
+    durablity: 0
+    coords:
+    - {x: 0, y: 1}
+  - blockType: 1
+    openDirections: -1
+    durablity: 1
+    coords:
+    - {x: 0, y: 0}
+  - blockType: 2
+    openDirections: 7
+    durablity: 0
+    coords:
+    - {x: -1, y: 1}
+  - blockType: 5
+    openDirections: -1
+    durablity: 0
+    coords:
+    - {x: -1, y: 0}
+  - blockType: 2
+    openDirections: 9
+    durablity: 0
+    coords:
+    - {x: -2, y: 1}
+  portals:
+  - coord: {x: 0, y: -1}
+    nextMap: {fileID: 11400000}
+    nextCoord: {x: 0, y: 1}
