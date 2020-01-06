@@ -12,7 +12,7 @@ namespace Monumentum.Controller.Main
         {
             playerController = player;
             curStage = stage;
-            SaveSystem.OnLoad += (s, c) => { s.ChangeTo(); playerController.Warp(c); };
+            //SaveSystem.OnLoad += (s, c) => { s.ChangeTo(); playerController.Warp(c); };
         }
 
         public static void StartGame()
@@ -20,7 +20,7 @@ namespace Monumentum.Controller.Main
             MapObjectFactory.OnStartGame();
             playerController.OnStartGame();
             SaveSystem.OnStartGame();
-            //curStage.ChangeTo();
+            curStage.ChangeTo();
         }
 
         public static void DoReset()
