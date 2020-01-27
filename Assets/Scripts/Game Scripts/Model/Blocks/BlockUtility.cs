@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Monumentum.Model
 {
     public static class BlockUtility
     {
-        public static bool TryMoveBlock(this IMovableBlock block, Direction direction)
+        public static bool TryMoveBlock(this IMovableBlock block, Directions direction)
         {
             Vector2Int destination = block.Coord + direction.ToVector2Int();
 
@@ -13,70 +14,47 @@ namespace Monumentum.Model
             {
                 block.MoveBlock(block.Coord, destination);
                 block.Coord = destination;
+                MapUtility.InformRearranging();
                 return true;
-            }
-            return false;
-        }
-
-        public static bool CanStandOn(this Vector2 position)
-        {
-            Vector2Int coord = position.ToVector2Int();
-            
-            if(coord.HasBlock(out ITile t))
-            {
-                Direction openDirections = t.OpenDirections;
-
-                if (openDirections.HasFlag(Direction.Up))
-                    if (Direction.Up.GetAccessibleSpace(coord).Contains(position))
-                        return true;
-                if (openDirections.HasFlag(Direction.Down))
-                    if (Direction.Down.GetAccessibleSpace(coord).Contains(position))
-                        return true;
-                if (openDirections.HasFlag(Direction.Left))
-                    if (Direction.Left.GetAccessibleSpace(coord).Contains(position))
-                        return true;
-                if (openDirections.HasFlag(Direction.Right))
-                    if (Direction.Right.GetAccessibleSpace(coord).Contains(position))
-                        return true;
             }
             return false;
         }
         
         public static void TryInteract(this ILocatable mob)
         {
-            if (TryGetExpectedCoord(mob.Position, out Vector2Int coord, out Direction dir))
-                if (coord.HasBlock(out IInteractable pushable))
-                    pushable.Interact(mob, dir);
+            if (TryGetExpectedCoord(mob.Position, out Vector2Int coord, out Directions dir))
+                if (coord.HasBlock(out IInteractable i))
+                    i.Interact(mob, dir);
 
-            bool TryGetExpectedCoord(Vector2 position, out Vector2Int expectedCoord, out Direction pushDir)
+            bool TryGetExpectedCoord(Vector2 position, out Vector2Int expectedCoord, out Directions pushDir)
             {
                 Vector2 distFromCenter = position - position.ToVector2Int();
                 expectedCoord = position.ToVector2Int();
-                pushDir = Direction.None;
+                pushDir = Directions.None;
 
                 switch (distFromCenter)
                 {
-                    case var d when (GetRect(Direction.Up).Contains(d)):
+                    case var d when (GetRect(Directions.Up).Contains(d)):
                         expectedCoord += Vector2Int.up;
-                        pushDir = Direction.Up;
+                        pushDir = Directions.Up;
                         return true;
-                    case var d when (GetRect(Direction.Down).Contains(d)):
+                    case var d when (GetRect(Directions.Down).Contains(d)):
                         expectedCoord += Vector2Int.down;
-                        pushDir = Direction.Down;
+                        pushDir = Directions.Down;
                         return true;
-                    case var d when (GetRect(Direction.Left).Contains(d)):
+                    case var d when (GetRect(Directions.Left).Contains(d)):
                         expectedCoord += Vector2Int.left;
-                        pushDir = Direction.Left;
+                        pushDir = Directions.Left;
                         return true;
-                    case var d when (GetRect(Direction.Right).Contains(d)):
+                    case var d when (GetRect(Directions.Right).Contains(d)):
                         expectedCoord += Vector2Int.right;
-                        pushDir = Direction.Right;
+                        pushDir = Directions.Right;
                         return true;
                 }
                 
                 return false;
 
-                Rect GetRect(Direction direction)
+                Rect GetRect(Directions direction)
                 {
                     Rect rect = InteractRect;
                     rect.position += direction.ToVector2() * JudgeUnit * 2;
@@ -113,18 +91,86 @@ namespace Monumentum.Model
             }
         }
 
-        //반드시 낱개의 direction에만 적용하시오.
-        private static Rect GetAccessibleSpace(this Direction direction, Vector2Int coord)
+        public static void TriggerPower(this Vector2Int coord, SoleDir dir)
+        {
+            Queue<(Vector2Int, SoleDir)> searchingCoords = new Queue<(Vector2Int, SoleDir)>();
+            searchingCoords.Enqueue((coord + dir.ToVector2Int(), dir.ToReverse()));
+            HashSet<(Vector2Int, SoleDir)> nextCoords = new HashSet<(Vector2Int, SoleDir)>();
+            HashSet<(Vector2Int, SoleDir)> searchEnded = new HashSet<(Vector2Int, SoleDir)>();
+
+            do Search();
+            while (searchingCoords.Count > 0);
+
+            void Search()
+            {
+                while (searchingCoords.Count > 0)
+                {
+                    (Vector2Int curCoord, SoleDir curDir) = searchingCoords.Dequeue();
+                    if (curCoord.HasBlock(out IPowerReactable p) && !searchEnded.Contains((curCoord, curDir)))
+                    {
+                        searchEnded.Add((curCoord, curDir));
+                        curCoord
+                            .GetNearCoordAndItsDir(p.ForcePower(curDir))
+                            .ForEach(o => { if (!searchEnded.Contains(o)) { nextCoords.Add(o); } });
+                    }
+                }
+
+                nextCoords.ForEach(c => searchingCoords.Enqueue(c));
+                nextCoords.Clear();
+            }
+        }
+
+        public static void GainRelic(this RelicEffect relic)
+        {
+            switch (relic)
+            {
+                case RelicEffect.KingHall:
+                    CanMoveTile = true;
+                    break;
+                case RelicEffect.Ether:
+                    break;
+            }
+        }
+
+        public static bool CanMoveTile { get; private set; } = false;
+        public static bool CanPushButtons { get; private set; } = false;
+        public static bool CanReset { get; private set; } = false;
+
+        public static bool CanStandOn(this Vector2 position)
+        {
+            Vector2Int coord = position.ToVector2Int();
+
+            if (coord.HasBlock(out ITile t))
+            {
+                Directions openDirections = t.OpenDirections;
+
+                if (openDirections.HasFlag(Directions.Up))
+                    if (Directions.Up.GetAccessibleSpace(coord).Contains(position))
+                        return true;
+                if (openDirections.HasFlag(Directions.Down))
+                    if (Directions.Down.GetAccessibleSpace(coord).Contains(position))
+                        return true;
+                if (openDirections.HasFlag(Directions.Left))
+                    if (Directions.Left.GetAccessibleSpace(coord).Contains(position))
+                        return true;
+                if (openDirections.HasFlag(Directions.Right))
+                    if (Directions.Right.GetAccessibleSpace(coord).Contains(position))
+                        return true;
+            }
+            return false;
+        }
+
+        private static Rect GetAccessibleSpace(this Directions direction, Vector2Int coord)
         {
             switch (direction)
             {
-                case Direction.Up:
+                case Directions.Up:
                     return new Rect(coord.x - PathWidth / 2f, coord.y - PathWidth / 2f, PathWidth, PathHeight);
-                case Direction.Down:
+                case Directions.Down:
                     return new Rect(coord.x - PathWidth / 2f, coord.y - PathHeight, PathWidth, PathHeight);
-                case Direction.Left:
+                case Directions.Left:
                     return new Rect(coord.x - 1 / 2f, coord.y - PathWidth / 2f, PathHeight, PathWidth);
-                case Direction.Right:
+                case Directions.Right:
                     return new Rect(coord.x - PathWidth / 2f, coord.y - PathWidth / 2f, PathHeight, PathWidth);
                 default:
                     return new Rect();

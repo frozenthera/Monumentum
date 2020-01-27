@@ -16,34 +16,22 @@ MonoBehaviour:
   blocks:
   - blockType: 5
     coords:
-    - {x: -2, y: 0}
-  tiles:
+    - {x: -2, y: -1}
+    - {x: 0, y: -1}
   - blockType: 1
-    openDirections: -1
-    durablity: 0
-    coords:
-    - {x: 0, y: 1}
-  - blockType: 1
-    openDirections: -1
-    durablity: 1
     coords:
     - {x: 0, y: 0}
-  - blockType: 2
-    openDirections: 7
-    durablity: 0
+    - {x: 0, y: 1}
+  roads:
+  - roadDirections: -1
     coords:
-    - {x: -1, y: 1}
-  - blockType: 5
-    openDirections: -1
-    durablity: 0
-    coords:
-    - {x: -1, y: 0}
-  - blockType: 2
-    openDirections: 9
-    durablity: 0
-    coords:
-    - {x: -2, y: 1}
-  portals:
+    - {x: 0, y: 0}
+  durs: []
+  portals: []
+  hangings:
   - coord: {x: 0, y: -1}
-    nextMap: {fileID: 11400000}
-    nextCoord: {x: 0, y: 1}
+    hanging: 3
+    directions: 8
+  - coord: {x: -2, y: -1}
+    hanging: 2
+    directions: 2

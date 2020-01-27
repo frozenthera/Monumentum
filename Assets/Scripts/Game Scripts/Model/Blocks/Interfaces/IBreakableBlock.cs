@@ -2,7 +2,7 @@
 
 namespace Monumentum.Model
 {
-    public interface IBreakableBlock : IBlock
+    public interface IBreakableBlock
     {
         void DamageBlock();
         event Action OnBreaking;

@@ -12,12 +12,15 @@ namespace Monumentum.Skin
             [SerializeField]
             private BlockType blockType;
             public BlockType BlockType => blockType;
+            //[SerializeField]
+            //private Sprite sprite;
             [SerializeField]
-            private Sprite sprite;
+            private GameObject voxelPrefab;
 
             void IThemeSet.LoadSet(IBlock block)
             {
-                OnThemeLoaded(block, sprite);
+                //OnThemeLoaded(block, sprite);
+                OnThemeBaseLoaded.Invoke(voxelPrefab, block);
             }
         }
     }

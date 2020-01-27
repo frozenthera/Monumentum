@@ -1,5 +1,6 @@
 ﻿using Monumentum.Model;
 using Monumentum.Model.Serialized;
+using UnityEngine;
 
 namespace Monumentum.Controller.Main
 {
@@ -7,12 +8,13 @@ namespace Monumentum.Controller.Main
     {
         private static PlayerController playerController;
         private static IStage curStage;
+        private static Vector2Int savedCoord;
 
         public static void Init(PlayerController player, IStage stage)
         {
             playerController = player;
             curStage = stage;
-            //SaveSystem.OnLoad += (s, c) => { s.ChangeTo(); playerController.Warp(c); };
+            SaveSystem.OnLoad += (s, c) => { curStage = s; savedCoord = c; };
         }
 
         public static void StartGame()
@@ -20,13 +22,14 @@ namespace Monumentum.Controller.Main
             MapObjectFactory.OnStartGame();
             playerController.OnStartGame();
             SaveSystem.OnStartGame();
-            curStage.ChangeTo();
+
+            DoReset();
         }
 
         public static void DoReset()
         {
             playerController.Warp(SaveSystem.SavedCoord);
-            curStage.ChangeTo();
+            curStage.Generate();
         }
     }
 }

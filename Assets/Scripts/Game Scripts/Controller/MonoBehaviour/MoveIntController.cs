@@ -28,7 +28,7 @@ namespace Monumentum.Controller
             CanMove = true;
         }
 
-        public void Move(Direction dir)
+        public void Move(Directions dir)
         {
             movable.MoveBlock(dir);
         }

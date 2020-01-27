@@ -63,6 +63,18 @@ namespace Monumentum.Model
             locationInfos.Clear();
             OnReset?.Invoke();
         }
+
+        public static void InformRearranging()
+        {
+            foreach (var pair in locationInfos)
+            {
+                if(pair.Value.Block is IRearrangingTarget t)
+                    t.UpdateByRearrange();
+            }
+            OnBlockRearranged?.Invoke();
+        }
+        public static event Action OnBlockRearranged;
+
         public static event Action OnReset;
     }
 }

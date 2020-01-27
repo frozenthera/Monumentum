@@ -42,20 +42,20 @@ namespace Monumentum.Controller
                 if (delta.magnitude > DragMinJudge)
                 {
                     Vector3 deltaDir = delta.normalized;
-                    Direction dir = Direction.None;
+                    Directions dir = Directions.None;
                     if (Mathf.Abs(deltaDir.x) > Mathf.Abs(deltaDir.y))
                     {
                         if (deltaDir.x > 0)
-                            dir = Direction.Right;
+                            dir = Directions.Right;
                         else
-                            dir = Direction.Left;
+                            dir = Directions.Left;
                     }
                     else
                     {
                         if (deltaDir.y > 0)
-                            dir = Direction.Up;
+                            dir = Directions.Up;
                         else
-                            dir = Direction.Down;
+                            dir = Directions.Down;
                     }
 
                     controller.Move(dir);

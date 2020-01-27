@@ -11,7 +11,7 @@ namespace Monumentum.Model.Serialized
             [SerializeField]
             private BlockType blockType;
             [SerializeField]
-            private Direction openDirections;
+            private Directions openDirections;
             [SerializeField]
             private int durablity;
             [SerializeField]
@@ -20,6 +20,36 @@ namespace Monumentum.Model.Serialized
             void IDistribution.ApplyToMap()
             {
                 coords.ForEach(c => blockType.CreateBlock(c, openDirections, durablity));
+            }
+        }
+
+        [Serializable]
+        private class RoadDistribution : IDistribution
+        {
+            [SerializeField]
+            private Directions roadDirections;
+
+            [SerializeField]
+            private Vector2Int[] coords;
+
+            void IDistribution.ApplyToMap()
+            {
+                coords.ForEach(c => BlockFactory.CreateRoad(c, roadDirections));
+            }
+        }
+
+        [Serializable]
+        private class DurabilityDistribution : IDistribution
+        {
+            [SerializeField]
+            private int durability;
+
+            [SerializeField]
+            private Vector2Int[] coords;
+
+            void IDistribution.ApplyToMap()
+            {
+                coords.ForEach(c => BlockFactory.SetDurability(c, durability));
             }
         }
     }

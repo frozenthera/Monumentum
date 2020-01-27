@@ -19,16 +19,16 @@ namespace Monumentum.Controller.Main
 
         private void MakeNewGame()
         {
+            MakeNewSave();
             Remove();
             StartGame();
-            MakeNewSave();
         }
 
         private void LoadPreviousGame()
         {
+            LoadGameData();
             Remove();
             StartGame();
-            LoadSaveData();
         }
 
         private void Remove()

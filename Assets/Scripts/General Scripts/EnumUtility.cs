@@ -8,7 +8,7 @@ namespace Monumentum
 {
     public static class EnumUtility
     {
-        public static int GetFlagCount(this Direction flag)
+        public static int GetFlagCount(this Directions flag)
         {
             int lValue = (int)flag;
             if (lValue == -1)
@@ -28,7 +28,7 @@ namespace Monumentum
             return iCount;
         }
 
-        public static Direction Rotate(this Direction dir, bool isClockwise = true)
+        public static Directions Rotate(this Directions dir, bool isClockwise = true)
         {
             int dirCode = (int)dir;
 
@@ -44,15 +44,40 @@ namespace Monumentum
                 dirCode += rest * 8;
             }
 
-            return (Direction)dirCode;
+            return (Directions)dirCode;
         }
 
-        public static bool hasCommonFlags(this Direction dir1, Direction dir2)
+        public static Directions ToMultiDir(this SoleDir soleDir)
+        {
+            return (Directions)soleDir;
+        }
+
+        public static bool HasCommonFlags(this Directions dir1, Directions dir2)
         {
             return (dir1.ToInt() & dir2.ToInt()) != 0;
         }
 
-        public static int ToInt(this Direction dir)
+        public static IEnumerable<SoleDir> ToSoleDirs(this Directions input)
+        {
+            int digit = input.ToInt();
+            for(int i = 0; i < 4; i++)
+                if((digit & (1 << i)) != 0)
+                    yield return (SoleDir)(1 << i);
+            yield break;
+        }
+
+        public static bool TrySubtract(this Directions dir1, SoleDir dir2, out Directions output)
+        {
+            output = Directions.None;
+            if(dir1.HasFlag((Directions)dir2))
+            {
+                output = (Directions)((int)dir1 - (int)dir2);
+                return true;
+            }
+            return false;
+        }
+
+        public static int ToInt(this Directions dir)
         {
             return (int)dir == -1 ? 15 : (int)dir;
         }

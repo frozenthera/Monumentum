@@ -55,7 +55,7 @@ namespace Monumentum.Model.Serialized
             CreateJsonFile(CreatePath, DefaultSaveName, jsonData);
         }
 
-        public static void LoadSaveData(string saveName = DefaultSaveName)
+        public static void LoadGameData(string saveName = DefaultSaveName)
         {
             curSave = LoadJsonFile<SaveFile>(CreatePath, saveName);
             OnLoad?.Invoke(curSave.currentStage, curSave.savedCoord);

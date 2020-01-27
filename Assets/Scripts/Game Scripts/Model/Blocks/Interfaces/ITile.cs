@@ -2,6 +2,6 @@
 {
     public interface ITile : IBlock
     {
-        Direction OpenDirections { get; }
+        Directions OpenDirections { get; }
     }
 }

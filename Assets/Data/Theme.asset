@@ -14,43 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocks:
   - blockType: 5
-    sprite: {fileID: 21300000, guid: 4c2133449fc762b408462639ac3ccaf2, type: 3}
+    voxelPrefab: {fileID: -927199367670048503, guid: 20c35047287fa8c4eac7fa9c084a5124,
+      type: 3}
   - blockType: 4
-    sprite: {fileID: 21300000, guid: bc46767b1e3d333429338f3c64105c32, type: 3}
-  tiles:
+    voxelPrefab: {fileID: 0}
   - blockType: 1
-    sprites:
-    - {fileID: 0}
-    - {fileID: 21300000, guid: 7592b2a8c32fea3468bc35ba8a7adf07, type: 3}
-    - {fileID: 21300000, guid: 32f9b58ccc7c03d45934abc3bf73dde6, type: 3}
-    - {fileID: 21300000, guid: 9d73b1080fd404044a01484b5165ba72, type: 3}
-    - {fileID: 21300000, guid: a3d6af5137d46fe46bab3804d9b93fae, type: 3}
-    - {fileID: 21300000, guid: 7d10968e45303d64fbc7e409f3d78902, type: 3}
-    - {fileID: 21300000, guid: 5438bbc49856aa14c9089ef0126da4fe, type: 3}
-    - {fileID: 21300000, guid: a89327d66d92d1e4ea703b083a5f0ad7, type: 3}
-    - {fileID: 21300000, guid: ce5868e64e18a5648ab1a2f266e86767, type: 3}
-    - {fileID: 21300000, guid: acb2ad88499d5da4c8ebad46a30a5e0c, type: 3}
-    - {fileID: 21300000, guid: d3f23b3fc9e1cc54b8141c56e05c244c, type: 3}
-    - {fileID: 21300000, guid: 87f805d8a51cb77428b18671d0cd5128, type: 3}
-    - {fileID: 21300000, guid: 406d70ffa4c662a4684e58c8796facd7, type: 3}
-    - {fileID: 21300000, guid: 6df854d1d4cb88c47a3e551b66810184, type: 3}
-    - {fileID: 21300000, guid: 26f0daed02890cf4bbf201e1f233eab5, type: 3}
-    - {fileID: 21300000, guid: a52429243adc01a4fab0f6116d158664, type: 3}
+    voxelPrefab: {fileID: -927199367670048503, guid: 20c35047287fa8c4eac7fa9c084a5124,
+      type: 3}
   - blockType: 2
-    sprites:
-    - {fileID: 0}
-    - {fileID: 21300000, guid: 7592b2a8c32fea3468bc35ba8a7adf07, type: 3}
-    - {fileID: 21300000, guid: 32f9b58ccc7c03d45934abc3bf73dde6, type: 3}
-    - {fileID: 21300000, guid: 9d73b1080fd404044a01484b5165ba72, type: 3}
-    - {fileID: 21300000, guid: a3d6af5137d46fe46bab3804d9b93fae, type: 3}
-    - {fileID: 21300000, guid: 7d10968e45303d64fbc7e409f3d78902, type: 3}
-    - {fileID: 21300000, guid: 5438bbc49856aa14c9089ef0126da4fe, type: 3}
-    - {fileID: 21300000, guid: a89327d66d92d1e4ea703b083a5f0ad7, type: 3}
-    - {fileID: 21300000, guid: ce5868e64e18a5648ab1a2f266e86767, type: 3}
-    - {fileID: 21300000, guid: acb2ad88499d5da4c8ebad46a30a5e0c, type: 3}
-    - {fileID: 21300000, guid: d3f23b3fc9e1cc54b8141c56e05c244c, type: 3}
-    - {fileID: 21300000, guid: 87f805d8a51cb77428b18671d0cd5128, type: 3}
-    - {fileID: 21300000, guid: 406d70ffa4c662a4684e58c8796facd7, type: 3}
-    - {fileID: 21300000, guid: 6df854d1d4cb88c47a3e551b66810184, type: 3}
-    - {fileID: 21300000, guid: 26f0daed02890cf4bbf201e1f233eab5, type: 3}
-    - {fileID: 21300000, guid: a52429243adc01a4fab0f6116d158664, type: 3}
+    voxelPrefab: {fileID: -927199367670048503, guid: bd3aba63ff36eb14d8676fa2ae9d29b4,
+      type: 3}
+  roads:
+    upVoxelPrefab: {fileID: -927199367670048503, guid: d2ca15548ab34ac43a0595e030bdaa95,
+      type: 3}
+    rightVoxelPrefab: {fileID: -927199367670048503, guid: 89ad7b5a7d6504d4a82e18e286758ad1,
+      type: 3}
+    downVoxelPrefab: {fileID: -927199367670048503, guid: 59f23ff74be7fd1458e0acba80a26ed2,
+      type: 3}
+    leftVoxelPrefab: {fileID: -927199367670048503, guid: 84579d18839cfa0489e26cd995479ad7,
+      type: 3}

@@ -11,7 +11,7 @@ namespace Monumentum.Model
         {
             private int durablity;
             
-            public RotatableTile(Vector2Int coord, Direction openDirections, int durablity)
+            public RotatableTile(Vector2Int coord, Directions openDirections, int durablity)
             {
                 this.Coord = coord;
                 this.OpenDirections = openDirections;
@@ -20,7 +20,7 @@ namespace Monumentum.Model
 
             public Vector2Int Coord { get; set; }
             //public Vector2Int PreviousCoord { get; private set; }
-            public Direction OpenDirections { get; private set; }
+            public Directions OpenDirections { get; private set; }
 
             public event Action OnMoved;
             public event RotateEventHandler OnRotated;
@@ -42,7 +42,7 @@ namespace Monumentum.Model
                 return true;
             }
 
-            void IMovableBlock.MoveBlock(Direction direction)
+            void IMovableBlock.MoveBlock(Directions direction)
             {
                 if (this.TryMoveBlock(direction))
                     OnMoved?.Invoke();

@@ -2,9 +2,9 @@
 
 namespace Monumentum.Model
 {
-    public interface IInteractable : IBlock
+    public interface IInteractable
     {
-        void Interact(ILocatable mob, Direction dir = Direction.None);
-        event Action OnInteracted;
+        void Interact(ILocatable mob, Directions dir = Directions.None);
+        event Action<Directions> OnInteracted;
     }
 }
