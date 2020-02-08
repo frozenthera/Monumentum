@@ -124,11 +124,11 @@ namespace Monumentum.Model
         {
             switch (relic)
             {
-                case RelicEffect.KingHall:
-                    CanMoveTile = true;
-                    break;
-                case RelicEffect.Ether:
-                    break;
+                //case RelicEffect.KingHall:
+                //    CanMoveTile = true;
+                //    break;
+                //case RelicEffect.Ether:
+                //    break;
             }
         }
 

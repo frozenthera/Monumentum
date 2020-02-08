@@ -21,8 +21,8 @@ namespace Monumentum.Controller.Main
 
             window.Init();
 
-            keyManager.OnTryWalk += player.Walk;
-            keyManager.OnTryInteract += player.Interact;
+            //keyManager.OnTryWalk += player.Walk;
+            //keyManager.OnTryInteract += player.Interact;
             keyManager.Init();
 
             SaveSystem.OnStartGame();

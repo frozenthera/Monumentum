@@ -34,7 +34,7 @@ namespace Monumentum.Model
 
         public static void CreateItem(this RelicEffect effect, Vector2Int coord)
         {
-            new Relic(effect.GainRelic());
+            //new Relic(effect.GainRelic());
         }
 
         public static void CreateRoad(Vector2Int coord, Directions directions)

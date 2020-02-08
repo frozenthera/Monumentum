@@ -20,7 +20,7 @@ namespace Monumentum.Controller.Main
         public static void StartGame()
         {
             MapObjectFactory.OnStartGame();
-            playerController.OnStartGame();
+            //playerController.OnStartGame();
             SaveSystem.OnStartGame();
 
             DoReset();
@@ -28,7 +28,7 @@ namespace Monumentum.Controller.Main
 
         public static void DoReset()
         {
-            playerController.Warp(SaveSystem.SavedCoord);
+            //playerController.Warp(SaveSystem.SavedCoord);
             curStage.Generate();
         }
     }

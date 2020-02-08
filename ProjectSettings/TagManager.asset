@@ -10,6 +10,7 @@ TagManager:
   - Empty_Cell
   - Breakable_Tile
   - Start_Tile
+  - Pullable
   layers:
   - Default
   - TransparentFX
@@ -19,10 +20,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Block
+  - Path
+  - Player
+  - Checkpoint
   - 
   - 
   - 
