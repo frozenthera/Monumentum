@@ -90,6 +90,7 @@ namespace Monumentum
             transform.GetComponent<TileController>().OnPullStart();
             Vector3 start = Input.mousePosition;
             yield return new WaitUntil(() => !Input.GetMouseButton(0));
+            transform.GetComponent<TileController>().OnPullEnd();
 
             Vector3 delta = Input.mousePosition - start;
             const int DragMinJudge = 40;
