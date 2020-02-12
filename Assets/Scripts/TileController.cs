@@ -18,16 +18,15 @@ namespace Monumentum
             
         }
 
-        IEnumerator OnMouseExit()
+        public void OnPullStart()
         {
-            yield return new WaitUntil(() => !Input.GetButton("Fire1"));
-            outline.enabled = false;
+            outline.enabled = true;
         }
 
-        void OnMouseOver()
+        IEnumerator OnMouseExit()
         {
-            if (PlayerInput.inst.Pull)
-                outline.enabled = true;
+            yield return new WaitUntil(() => !Input.GetButton("Fire1") && PlayerController.inst.CanPull);
+            outline.enabled = false;
         }
     }
 }

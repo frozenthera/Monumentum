@@ -6,9 +6,15 @@ namespace Monumentum
 {
     public class ChainRotator : MonoBehaviour
     {
+        bool isDuringRotate = false;
+
         public void Rotate(bool isClockwise = true)
         {
-            Debug.Log(3);
+            if (isDuringRotate)
+                return;
+
+            isDuringRotate = true;
+
             Queue<ChainRotator> searchingRotators = new Queue<ChainRotator>();
             HashSet<ChainRotator> nextRotators = new HashSet<ChainRotator>();
             HashSet<ChainRotator> searchEnded = new HashSet<ChainRotator>();
@@ -55,6 +61,8 @@ namespace Monumentum
                     yield return null;
                 }
                 transform.rotation = to;
+
+                isDuringRotate = false;
             }
         }
     }

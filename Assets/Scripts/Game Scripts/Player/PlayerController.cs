@@ -11,7 +11,8 @@ namespace Monumentum
 
         public float minTurnSpeed = 400f;         // How fast Ellen turns when moving at maximum speed.
         public float maxTurnSpeed = 1200f;        // How fast Ellen turns when stationary.
-        public bool canPull = false;            //당길 수 있는가 
+
+        public PlayerProgress progress = new PlayerProgress();
 
         protected CharacterController m_CharCtrl;
         protected PlayerInput m_Input;
@@ -31,7 +32,7 @@ namespace Monumentum
             get { return !Mathf.Approximately(m_Input.MoveInput.sqrMagnitude, 0f); }
         }
 
-        public bool CanPull { set => canPull = value; }
+        public bool CanPull { get => progress.canPull; set => progress.canPull = value; }
 
         void Awake()
         {
@@ -41,7 +42,9 @@ namespace Monumentum
 
         void FixedUpdate()
         {
-            if (m_Input.Pull && canPull)
+            CheckPreprocess();
+
+            if (m_Input.Pull && CanPull)
                 CheckPullBlock();
 
             CalculateForwardMovement();
@@ -60,20 +63,31 @@ namespace Monumentum
             #endregion
         }
 
+        void CheckPreprocess()
+        {
+            if(Input.GetButtonDown("Reset"))
+            {
+                RoomController.Load();
+            }
+        }
+
         Coroutine m_PullBlockCoroutine;
         void CheckPullBlock()
         {
             int layerMask = 1 << LayerMask.NameToLayer("Block");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out var hit, layerMask) && hit.transform.CompareTag("Pullable"))
-            {
-                if(m_PullBlockCoroutine == null)
-                    m_PullBlockCoroutine = StartCoroutine(PullBlock(hit.transform));
+            if (Physics.Raycast(ray, out var hit, float.PositiveInfinity , layerMask)){
+                if (hit.transform.CompareTag("Pullable"))
+                {
+                    if (m_PullBlockCoroutine == null)
+                        m_PullBlockCoroutine = StartCoroutine(PullBlock(hit.transform));
+                }
             }
         }
 
         IEnumerator PullBlock(Transform transform)
         {
+            transform.GetComponent<TileController>().OnPullStart();
             Vector3 start = Input.mousePosition;
             yield return new WaitUntil(() => !Input.GetMouseButton(0));
 
@@ -268,6 +282,11 @@ namespace Monumentum
         public void RespawnFinished()
         {
             //m_Respawning = false;
+        }
+        [System.Serializable]
+        public class PlayerProgress
+        {
+            public bool canPull = false;            //당길 수 있는가 
         }
     }
 }

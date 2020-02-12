@@ -16,11 +16,13 @@ namespace Gamekit3D
 
         protected override void ExecuteOnEnter(Collider other)
         {
+            base.ExecuteOnEnter(other);
             canExecuteButtons = true;
         }
 
         protected override void ExecuteOnExit(Collider other)
         {
+            base.ExecuteOnExit(other);
             canExecuteButtons = false;
         }
 
