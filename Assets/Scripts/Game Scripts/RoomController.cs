@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Monumentum
 {
+    [RequireComponent(typeof(BoxCollider))]
     public class RoomController : MonoBehaviour
     {
         static RoomController m_CurrentRoom;
