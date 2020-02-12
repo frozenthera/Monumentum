@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 7897509436389374761}
   - component: {fileID: 8294851463772895292}
   - component: {fileID: 470299302917115775}
+  - component: {fileID: 63284135569604824}
   m_Layer: 8
   m_Name: StraightWayNormal
   m_TagString: Untagged
@@ -75,6 +76,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a91659b8f2f5240a481c1d9ada6293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &63284135569604824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4807984204297403576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 0, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!65 &2622229166939643909
 BoxCollider:
   m_ObjectHideFlags: 0
