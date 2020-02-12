@@ -149,8 +149,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 6, y: 3.5, z: 5}
+  m_Center: {x: 2.5136752, y: 1.2423453, z: 0.018294096}
 --- !u!114 &-8616373308420746419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,12 +783,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 175576583, guid: 0da78b613f2c93846a7d65b4b6cdda94, type: 3}
+    - target: {fileID: 1780331892593386123, guid: 0da78b613f2c93846a7d65b4b6cdda94,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d7d6de757056d854a9e3ccf5964bc6a1, type: 2}
-    - target: {fileID: 1780331892593386123, guid: 0da78b613f2c93846a7d65b4b6cdda94,
-        type: 3}
+    - target: {fileID: 175576583, guid: 0da78b613f2c93846a7d65b4b6cdda94, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d7d6de757056d854a9e3ccf5964bc6a1, type: 2}
@@ -807,6 +807,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6746149953294429272}
     m_Modifications:
+    - target: {fileID: 1059494493682279730, guid: 39e7465d86167bd48a08384b9e90fa8c,
+        type: 3}
+      propertyPath: m_Name
+      value: Normal Tile Straight (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1059494493682279741, guid: 39e7465d86167bd48a08384b9e90fa8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -871,11 +876,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1059494493682279730, guid: 39e7465d86167bd48a08384b9e90fa8c,
-        type: 3}
-      propertyPath: m_Name
-      value: Normal Tile Straight (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1059494492326604565, guid: 39e7465d86167bd48a08384b9e90fa8c,
         type: 3}
@@ -1118,6 +1118,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6746149953294429272}
     m_Modifications:
+    - target: {fileID: 1059494493682279730, guid: 39e7465d86167bd48a08384b9e90fa8c,
+        type: 3}
+      propertyPath: m_Name
+      value: Normal Tile Straight (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 1059494493682279741, guid: 39e7465d86167bd48a08384b9e90fa8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1182,11 +1187,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1059494493682279730, guid: 39e7465d86167bd48a08384b9e90fa8c,
-        type: 3}
-      propertyPath: m_Name
-      value: Normal Tile Straight (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1059494492326604565, guid: 39e7465d86167bd48a08384b9e90fa8c,
         type: 3}
@@ -1348,12 +1348,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 175576583, guid: 0da78b613f2c93846a7d65b4b6cdda94, type: 3}
+    - target: {fileID: 1780331892593386123, guid: 0da78b613f2c93846a7d65b4b6cdda94,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d7d6de757056d854a9e3ccf5964bc6a1, type: 2}
-    - target: {fileID: 1780331892593386123, guid: 0da78b613f2c93846a7d65b4b6cdda94,
-        type: 3}
+    - target: {fileID: 175576583, guid: 0da78b613f2c93846a7d65b4b6cdda94, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d7d6de757056d854a9e3ccf5964bc6a1, type: 2}
