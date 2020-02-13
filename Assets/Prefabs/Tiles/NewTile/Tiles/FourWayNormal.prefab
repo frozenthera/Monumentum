@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7758559676014352924}
   m_Layer: 8
   m_Name: FourWayNormal
-  m_TagString: Untagged
+  m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,16 +127,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 617021961660451867}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: d00de1bbf37061045b0be5ab1e7a14e5,
-        type: 3}
-      propertyPath: m_Name
-      value: FourWayBase
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: d00de1bbf37061045b0be5ab1e7a14e5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d00de1bbf37061045b0be5ab1e7a14e5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,6 +181,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d00de1bbf37061045b0be5ab1e7a14e5,
+        type: 3}
+      propertyPath: m_Name
+      value: FourWayBase
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d00de1bbf37061045b0be5ab1e7a14e5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -2416733968201007103, guid: d00de1bbf37061045b0be5ab1e7a14e5,
         type: 3}
@@ -223,16 +223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 617021961660451867}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
-        type: 3}
-      propertyPath: m_Name
-      value: FourWayFloor
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -288,16 +278,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -2416733968201007103, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2c431b54c6395524e9d4c703504e4c5c, type: 2}
     - target: {fileID: 2534866581884222612, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
+        type: 3}
+      propertyPath: m_Name
+      value: FourWayFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2416733968201007103, guid: a504e1a459e2f1e4fa9d23eaa83f605a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2c431b54c6395524e9d4c703504e4c5c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a504e1a459e2f1e4fa9d23eaa83f605a, type: 3}
 --- !u!4 &2648423018413077130 stripped

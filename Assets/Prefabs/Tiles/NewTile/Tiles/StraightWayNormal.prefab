@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 63284135569604824}
   m_Layer: 8
   m_Name: StraightWayNormal
-  m_TagString: Untagged
+  m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,16 +210,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7897509436389374761}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 2b45d846c67b7124c9364a49b2f943ee,
-        type: 3}
-      propertyPath: m_Name
-      value: StraightWayBase
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2b45d846c67b7124c9364a49b2f943ee,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b45d846c67b7124c9364a49b2f943ee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -274,6 +264,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2b45d846c67b7124c9364a49b2f943ee,
+        type: 3}
+      propertyPath: m_Name
+      value: StraightWayBase
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2b45d846c67b7124c9364a49b2f943ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -2416733968201007103, guid: 2b45d846c67b7124c9364a49b2f943ee,
         type: 3}

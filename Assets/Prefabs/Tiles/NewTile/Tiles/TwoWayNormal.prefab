@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6319896626900011613}
   m_Layer: 8
   m_Name: TwoWayNormal
-  m_TagString: Untagged
+  m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,16 +127,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6892707522133912665}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: f946894e16a300e4e87098ad77c4c11a,
-        type: 3}
-      propertyPath: m_Name
-      value: TwoWayBase
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: f946894e16a300e4e87098ad77c4c11a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f946894e16a300e4e87098ad77c4c11a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,6 +181,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f946894e16a300e4e87098ad77c4c11a,
+        type: 3}
+      propertyPath: m_Name
+      value: TwoWayBase
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f946894e16a300e4e87098ad77c4c11a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -2416733968201007103, guid: f946894e16a300e4e87098ad77c4c11a,
         type: 3}
@@ -223,16 +223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6892707522133912665}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 2b716a7ef69b0e546b1ef8994f039c96,
-        type: 3}
-      propertyPath: m_Name
-      value: TwoWayFloor
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2b716a7ef69b0e546b1ef8994f039c96,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b716a7ef69b0e546b1ef8994f039c96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -288,16 +278,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -2416733968201007103, guid: 2b716a7ef69b0e546b1ef8994f039c96,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5afb04a04c0315542b451a72a1aef93c, type: 2}
     - target: {fileID: 2534866581884222612, guid: 2b716a7ef69b0e546b1ef8994f039c96,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2b716a7ef69b0e546b1ef8994f039c96,
+        type: 3}
+      propertyPath: m_Name
+      value: TwoWayFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2b716a7ef69b0e546b1ef8994f039c96,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2416733968201007103, guid: 2b716a7ef69b0e546b1ef8994f039c96,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5afb04a04c0315542b451a72a1aef93c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b716a7ef69b0e546b1ef8994f039c96, type: 3}
 --- !u!4 &4287309776954265984 stripped
