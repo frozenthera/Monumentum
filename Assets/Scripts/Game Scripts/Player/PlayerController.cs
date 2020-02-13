@@ -96,7 +96,10 @@ namespace Monumentum
             const int DragMinJudge = 40;
 
             if (delta.magnitude < DragMinJudge)
+            {
+                m_PullBlockCoroutine = null;
                 yield break;
+            }
 
             Vector3 mouseDeltaDir = delta.normalized;
             Vector3 destinationPos = transform.position;
