@@ -38,6 +38,8 @@ namespace Monumentum
         {
             m_Input = GetComponent<PlayerInput>();
             m_CharCtrl = GetComponent<CharacterController>();
+
+            PowerSource.OnBlockUpdated();
         }
 
         void FixedUpdate()
@@ -87,6 +89,8 @@ namespace Monumentum
 
         IEnumerator PullBlock(Transform transform)
         {
+            PowerSource.OnBlockUpdated();
+
             transform.GetComponent<TileController>().OnPullStart();
             Vector3 start = Input.mousePosition;
             yield return new WaitUntil(() => !Input.GetMouseButton(0));

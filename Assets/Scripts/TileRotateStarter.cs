@@ -24,7 +24,7 @@ namespace Monumentum {
                     if(p.HasBlock(out ChainRotator r))
                     {
                         Debug.Log(3);
-                        r.Rotate();
+                        r.StartRotate();
                     }
                 }
             );

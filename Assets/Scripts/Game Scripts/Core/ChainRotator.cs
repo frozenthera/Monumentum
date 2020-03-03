@@ -8,12 +8,13 @@ namespace Monumentum
     {
         bool isDuringRotate = false;
 
-        public void Rotate(bool isClockwise = true)
+        public void StartRotate(bool isClockwise = true)
         {
             if (isDuringRotate)
                 return;
 
             isDuringRotate = true;
+            PowerSource.OnBlockUpdated();
 
             Queue<ChainRotator> searchingRotators = new Queue<ChainRotator>();
             HashSet<ChainRotator> nextRotators = new HashSet<ChainRotator>();
@@ -45,6 +46,7 @@ namespace Monumentum
 
         void RotateBlock(bool isClockwise = true)
         {
+            GetComponent<PowerWire>()?.OnRotate(isClockwise);
             StartCoroutine(Rotate(Vector3.up, isClockwise ? -90 : 90));
 
             IEnumerator Rotate(Vector3 axis, float angle, float duration = 1.0f)

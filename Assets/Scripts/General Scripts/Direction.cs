@@ -6,18 +6,18 @@ namespace Monumentum.Model
     public enum Directions
     {
         None,
-        Up = 1,
+        Forward = 1,
         Right = 2,
-        Down = 4,
+        Back = 4,
         Left = 8,
     }
 
     public enum SoleDir
     {
         None,
-        Up = 1,
+        Forward = 1,
         Right = 2,
-        Down = 4,
+        Back = 4,
         Left = 8,
     }
 }

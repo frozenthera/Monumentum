@@ -33,12 +33,34 @@ namespace Monumentum.Model
         }
 
         public static Vector2Int ToVector2Int(this SoleDir direction) => ((Directions)direction).ToVector2Int();
+
+        public static Vector3 ToVector3(this SoleDir direction)
+        {
+            switch(direction)
+            {
+                case SoleDir.Forward: return Vector3.forward;
+                case SoleDir.Right: return Vector3.right;
+                case SoleDir.Back: return Vector3.back;
+                case SoleDir.Left: return Vector3.left;
+                default: return Vector3.zero;
+            }
+        }
+
+        /*public static Vector3 ToVector3(this SoleDir dir)
+        {
+            switch(dir)
+            {
+                case SoleDir.Up:
+                    return Vector3.forward
+            }
+        }*/
+
         public static Vector2Int ToVector2Int(this Directions direction)
         {
             Vector2Int vector2 = new Vector2Int();
-            if (direction.HasFlag(Directions.Up))
+            if (direction.HasFlag(Directions.Forward))
                 vector2 += Vector2Int.up;
-            if (direction.HasFlag(Directions.Down))
+            if (direction.HasFlag(Directions.Back))
                 vector2 += Vector2Int.down;
             if (direction.HasFlag(Directions.Left))
                 vector2 += Vector2Int.left;
@@ -50,9 +72,9 @@ namespace Monumentum.Model
         public static Vector2 ToVector2(this Directions direction)
         {
             Vector2 vector2 = new Vector2();
-            if (direction.HasFlag(Directions.Up))
+            if (direction.HasFlag(Directions.Forward))
                 vector2 += Vector2.up;
-            if (direction.HasFlag(Directions.Down))
+            if (direction.HasFlag(Directions.Back))
                 vector2 += Vector2.down;
             if (direction.HasFlag(Directions.Left))
                 vector2 += Vector2.left;
@@ -84,9 +106,9 @@ namespace Monumentum.Model
         public static (Vector2Int, SoleDir)[] GetNearCoordAndDirs(this Vector2Int coord)
         {
             return new (Vector2Int, SoleDir)[] {
-                (coord + Vector2Int.up, SoleDir.Down),
+                (coord + Vector2Int.up, SoleDir.Back),
                 (coord + Vector2Int.right, SoleDir.Left),
-                (coord + Vector2Int.down, SoleDir.Up),
+                (coord + Vector2Int.down, SoleDir.Forward),
                 (coord + Vector2Int.left, SoleDir.Right)
             };
         }

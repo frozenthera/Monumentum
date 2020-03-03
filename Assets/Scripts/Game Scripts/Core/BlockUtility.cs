@@ -12,7 +12,7 @@ namespace Monumentum
             return Physics.Raycast(pos - 3* Vector3.up, Vector3.up, 3f, layerMask);
         }
 
-        public static bool HasBlock<T>(this Vector3 pos, out T result) where T : MonoBehaviour
+        public static bool HasBlock<T>(this Vector3 pos, out T result) where T : class
         {
             Debug.Log(pos);
             int layerMask = 1 << LayerMask.NameToLayer("Block");
